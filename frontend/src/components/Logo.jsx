@@ -9,10 +9,10 @@ export const Logo = ({ size = "default" }) => {
       <div
         className={`grid ${dims} place-items-center rounded-full bg-primary font-heading ${icon} font-black text-primary-foreground shadow-lg shadow-primary/30`}
       >
-        EC
+        U
       </div>
       <span className={`font-heading ${text} font-extrabold tracking-tight text-foreground`}>
-        EduConnect
+        Usfuturee
       </span>
     </div>
   );
@@ -20,7 +20,7 @@ export const Logo = ({ size = "default" }) => {
 
 export const BrandMark = () => (
   <div className="grid h-9 w-9 place-items-center rounded-full bg-primary font-heading text-base font-black text-primary-foreground shadow-lg shadow-primary/30">
-    EC
+    U
   </div>
 );
 

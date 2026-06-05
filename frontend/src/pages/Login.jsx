@@ -124,13 +124,13 @@ export default function Login() {
       </div>
 
       {/* Branding panel */}
-      <div className="relative hidden overflow-hidden bg-royal lg:order-2 lg:block">
+      <div className="relative hidden overflow-hidden bg-primary lg:order-2 lg:block">
         <img
           src="https://images.unsplash.com/photo-1515378960530-7c0da6231fb1?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1ODF8MHwxfHNlYXJjaHwxfHxzdHVkZW50JTIwc3R1ZHlpbmclMjBsYXB0b3B8ZW58MHx8fHwxNzgwNjg4NzgzfDA&ixlib=rb-4.1.0&q=85&w=1200"
           alt="students"
           className="absolute inset-0 h-full w-full object-cover opacity-25"
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-royal via-royal/90 to-[#2a35c7]" />
+        <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary/90 to-[#0b4fa8]" />
         <div className="relative flex h-full flex-col justify-between p-12 text-primary-foreground">
           <div />
           <div>

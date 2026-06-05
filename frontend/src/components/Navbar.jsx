@@ -93,7 +93,7 @@ export const Navbar = () => {
             <IconButton testid="navbar-notifications-button" icon={Bell} onClick={() => {}} />
             <span
               data-testid="notifications-badge"
-              className="absolute -right-0.5 -top-0.5 grid h-5 min-w-5 place-items-center rounded-full bg-flame px-1 text-[10px] font-bold text-white"
+              className="absolute -right-0.5 -top-0.5 grid h-5 min-w-5 place-items-center rounded-full bg-destructive px-1 text-[10px] font-bold text-destructive-foreground"
             >
               3
             </span>
@@ -102,7 +102,7 @@ export const Navbar = () => {
           <button
             data-testid="portal-button"
             onClick={() => navigate("/groups")}
-            className="hidden items-center gap-2 rounded-full bg-flame px-4 py-2 text-sm font-semibold text-white transition-all duration-200 hover:bg-flame-hover sm:flex"
+            className="hidden items-center gap-2 rounded-full border border-primary px-4 py-2 text-sm font-semibold text-primary transition-all duration-200 hover:bg-primary hover:text-primary-foreground sm:flex"
           >
             <LayoutGrid className="h-4 w-4" /> Portal
           </button>

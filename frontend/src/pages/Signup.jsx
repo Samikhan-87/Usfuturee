@@ -47,13 +47,13 @@ export default function Signup() {
   return (
     <div className="grid min-h-screen lg:grid-cols-2">
       {/* Branding panel */}
-      <div className="relative hidden overflow-hidden bg-royal lg:block">
+      <div className="relative hidden overflow-hidden bg-primary lg:block">
         <img
           src="https://images.pexels.com/photos/8199249/pexels-photo-8199249.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=1200&w=900"
           alt="students"
           className="absolute inset-0 h-full w-full object-cover opacity-25"
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-[#2a35c7] via-royal/90 to-royal" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0b4fa8] via-primary/90 to-primary" />
         <div className="relative flex h-full flex-col justify-between p-12 text-primary-foreground">
           <Logo size="lg" />
           <div>

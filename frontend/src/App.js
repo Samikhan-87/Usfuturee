@@ -8,7 +8,8 @@ import Signup from "@/pages/Signup";
 import Home from "@/pages/Home";
 import Profile from "@/pages/Profile";
 import Groups from "@/pages/Groups";
-import ComingSoon from "@/pages/ComingSoon";
+import Events from "@/pages/Events";
+import AIChat from "@/pages/AIChat";
 
 const guarded = (el) => <ProtectedRoute>{el}</ProtectedRoute>;
 
@@ -23,8 +24,8 @@ function App() {
             <Route path="/" element={guarded(<Home />)} />
             <Route path="/profile" element={guarded(<Profile />)} />
             <Route path="/groups" element={guarded(<Groups />)} />
-            <Route path="/events" element={guarded(<ComingSoon />)} />
-            <Route path="/ai-chat" element={guarded(<ComingSoon />)} />
+            <Route path="/events" element={guarded(<Events />)} />
+            <Route path="/ai-chat" element={guarded(<AIChat />)} />
           </Routes>
         </BrowserRouter>
         <Toaster position="top-center" richColors />

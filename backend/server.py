@@ -1,4 +1,4 @@
-from fastapi import FastAPI, APIRouter
+from fastapi import FastAPI, APIRouter, HTTPException
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
@@ -9,6 +9,7 @@ from pydantic import BaseModel, Field, ConfigDict
 from typing import List
 import uuid
 from datetime import datetime, timezone
+from emergentintegrations.llm.chat import LlmChat, UserMessage
 
 
 ROOT_DIR = Path(__file__).parent
@@ -18,6 +19,8 @@ load_dotenv(ROOT_DIR / '.env')
 mongo_url = os.environ['MONGO_URL']
 client = AsyncIOMotorClient(mongo_url)
 db = client[os.environ['DB_NAME']]
+
+EMERGENT_LLM_KEY = os.environ.get('EMERGENT_LLM_KEY')
 
 # Create the main app without a prefix
 app = FastAPI()
@@ -65,6 +68,54 @@ async def get_status_checks():
             check['timestamp'] = datetime.fromisoformat(check['timestamp'])
     
     return status_checks
+
+# Include the router in the main app
+EDUBOT_SYSTEM_MESSAGE = (
+    "You are EduBot, a friendly and knowledgeable educational assistant for Usfuturee, "
+    "an educational social platform that connects students, teachers, principals, and parents. "
+    "Help users with questions about checking grades, submitting assignments, parent-teacher meetings, "
+    "extracurricular activities, contacting teachers, study resources, scholarships, and the school calendar. "
+    "Keep answers concise, warm, encouraging, and practical. Use simple language and short paragraphs or bullet "
+    "points. If a question is outside education, gently guide the user back to how you can support their learning journey. "
+    "Always respond in plain conversational text. Do NOT use markdown formatting such as **bold**, # headings, "
+    "or --- dividers. When listing steps, use simple hyphen bullets and keep the whole reply brief."
+)
+
+
+class ChatRequest(BaseModel):
+    session_id: str
+    message: str
+
+
+class ChatResponse(BaseModel):
+    reply: str
+
+
+@api_router.post("/chat/edubot", response_model=ChatResponse)
+async def chat_edubot(req: ChatRequest):
+    if not EMERGENT_LLM_KEY:
+        raise HTTPException(status_code=500, detail="LLM key not configured")
+    if not req.message.strip():
+        raise HTTPException(status_code=400, detail="Message cannot be empty")
+    try:
+        chat = LlmChat(
+            api_key=EMERGENT_LLM_KEY,
+            session_id=req.session_id,
+            system_message=EDUBOT_SYSTEM_MESSAGE,
+        ).with_model("anthropic", "claude-sonnet-4-6")
+        reply = await chat.send_message(UserMessage(text=req.message))
+        reply_text = reply if isinstance(reply, str) else str(reply)
+    except Exception as e:
+        logger.error(f"EduBot error: {e}")
+        raise HTTPException(status_code=502, detail="EduBot is unavailable right now. Please try again.")
+
+    now = datetime.now(timezone.utc).isoformat()
+    await db.edubot_messages.insert_many([
+        {"session_id": req.session_id, "role": "user", "content": req.message, "ts": now},
+        {"session_id": req.session_id, "role": "assistant", "content": reply_text, "ts": now},
+    ])
+    return ChatResponse(reply=reply_text)
+
 
 # Include the router in the main app
 app.include_router(api_router)

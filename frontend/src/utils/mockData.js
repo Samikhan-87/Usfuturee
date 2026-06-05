@@ -181,3 +181,61 @@ export const ACHIEVEMENTS = [
   { id: "a3", title: "Top Contributor", year: "2024", color: "text-emerald-500" },
   { id: "a4", title: "Perfect Attendance", year: "2024", color: "text-violet-500" },
 ];
+
+const IMG_STUDENT = "https://images.unsplash.com/photo-1515378960530-7c0da6231fb1?auto=format&fit=crop&w=800&q=70";
+const IMG_RESEARCH = "https://images.pexels.com/photos/8199249/pexels-photo-8199249.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=400&w=800";
+const IMG_DESIGN = "https://images.pexels.com/photos/7683899/pexels-photo-7683899.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=400&w=800";
+const IMG_SPORT = "https://images.pexels.com/photos/31656148/pexels-photo-31656148.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=400&w=800";
+
+// ---------- GROUPS ----------
+export const GROUP_CATEGORIES = ["Science", "Mathematics", "Arts", "Sports", "Technology", "Literature"];
+
+export const YOUR_GROUPS = [
+  { id: "yg1", name: "Algorithms & Data Structures", members: "24,512", privacy: "public", category: "Technology", banner: BANNER },
+  { id: "yg2", name: "Pre-Med Warriors", members: "18,203", privacy: "private", category: "Science", banner: IMG_RESEARCH },
+  { id: "yg3", name: "Design Systems Club", members: "9,874", privacy: "public", category: "Arts", banner: IMG_DESIGN },
+  { id: "yg4", name: "Math Olympiad Hub", members: "31,090", privacy: "private", category: "Mathematics", banner: IMG_SPORT },
+];
+
+export const DISCOVER_GROUPS = [
+  { id: "dg1", name: "Quantum Physics Society", members: "12,043", category: "Science", banner: IMG_RESEARCH },
+  { id: "dg2", name: "Creative Writers Guild", members: "8,221", category: "Literature", banner: IMG_DESIGN },
+  { id: "dg3", name: "Varsity Athletics", members: "15,670", category: "Sports", banner: IMG_SPORT },
+  { id: "dg4", name: "AI & Machine Learning", members: "42,110", category: "Technology", banner: IMG_STUDENT },
+  { id: "dg5", name: "Digital Arts Collective", members: "6,540", category: "Arts", banner: BANNER },
+];
+
+export const GROUP_FEED = [
+  { id: "gp1", author: { name: "Liam Chen", avatar: AVATARS.diego, verified: false }, group: "Algorithms & Data Structures", time: "1h", content: "Just solved the weekly DP challenge — sharing my approach to the knapsack variant. AMA! 🧩", image: null, tag: "Challenge", likes: 84, comments: 19, shares: 4 },
+  { id: "gp2", author: { name: "Sofia Nguyen", avatar: AVATARS.aisha, verified: true }, group: "Design Systems Club", time: "3h", content: "New Figma tokens template for the club — accessible color contrast baked in. Link in comments below! 🎨", image: IMG_DESIGN, tag: "Resource", likes: 152, comments: 33, shares: 21 },
+  { id: "gp3", author: { name: "David Okafor", avatar: AVATARS.maya, verified: true }, group: "Pre-Med Warriors", time: "6h", content: "Reminder: MCAT mock test this Sunday 9 AM. Bring your A-game and a water bottle 💪", image: null, tag: "Announcement", likes: 210, comments: 48, shares: 12 },
+];
+
+// ---------- EVENTS ----------
+export const EVENT_CATEGORIES = ["Academic", "Sports", "Cultural"];
+export const EVENT_REGIONS = ["Online", "West", "East", "North", "South"];
+export const EVENT_INSTITUTIONS = ["Stanford University", "Lincoln Academy", "Riverside High School", "MIT"];
+
+export const EVENTS_UPCOMING = [
+  { id: "ue1", title: "AI in Education Summit 2026", category: "Academic", date: "Jun 12, 2026", time: "10:00 AM", location: "Virtual • Live", organizer: "EdTech Alliance", institution: "Stanford University", region: "Online", cover: IMG_STUDENT },
+  { id: "ue2", title: "Inter-School Football Championship", category: "Sports", date: "Jun 18, 2026", time: "2:00 PM", location: "Lincoln Stadium, CA", organizer: "Athletics Department", institution: "Lincoln Academy", region: "West", cover: IMG_SPORT },
+  { id: "ue3", title: "Spring Cultural Festival", category: "Cultural", date: "Jun 22, 2026", time: "5:30 PM", location: "Riverside Auditorium", organizer: "Arts & Culture Society", institution: "Riverside High School", region: "East", cover: IMG_DESIGN },
+  { id: "ue4", title: "Annual Science Fair", category: "Academic", date: "Jun 28, 2026", time: "9:00 AM", location: "Main Campus Hall", organizer: "Science Department", institution: "Stanford University", region: "West", cover: IMG_RESEARCH },
+];
+
+export const EVENTS_PAST = [
+  { id: "pe1", title: "Robotics Workshop", category: "Academic", date: "May 14, 2026", time: "11:00 AM", location: "Tech Lab 2", organizer: "Engineering Department", institution: "MIT", region: "East", cover: BANNER },
+  { id: "pe2", title: "Annual Debate Tournament", category: "Cultural", date: "Apr 30, 2026", time: "1:00 PM", location: "Lincoln Auditorium", organizer: "Literary Society", institution: "Lincoln Academy", region: "West", cover: IMG_DESIGN },
+];
+
+// ---------- EDUBOT ----------
+export const EDUBOT_QUESTIONS = [
+  "How do I check my grades?",
+  "When is the next parent-teacher meeting?",
+  "How do I submit an assignment?",
+  "What extracurricular activities are available?",
+  "How do I contact my teacher?",
+  "What resources are available for studying?",
+  "How do I apply for a scholarship?",
+  "What is the school calendar for this year?",
+];
