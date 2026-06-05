@@ -52,6 +52,34 @@ User then specified the full feature set each of these pages must contain.
 ## Iteration 4 (Jan 2026) — Home feed deep features
 - Installed `react-image-crop` + `emoji-picker-react`
 - **CSS**: switched body font to Plus Jakarta Sans site-wide; replaced brown dark-mode accent with proper blue (`214 60% 18%` / `214 89% 78%`); added `storyProgress` keyframe for story viewer
+- **feedStore** rewritten: persisted reactions, reactionCounts, comments (threaded), saved[], following{}
+- **insightsStore** new — persisted `{ university, major }` target with `isRelevantToTarget` helper
+- **StoryViewer** — full-screen modal with auto-advance progress bar, prev/next arrows, ESC/arrow keys, hold-to-pause
+- **StoriesRow** — clickable stories open viewer; "Your Story" tile opens upload modal (image/video, 2 MB limit)
+- **PostCard** — hover reactions popup (6 emojis), inline threaded comments, Save toggle, Share/Report/Edit/Delete modals, See more/less, verified blue tick only on institutions with tooltip, Follow hidden on own posts, "Relevant to your goal" badge
+- **PostComposer** — image crop + emoji picker, instant feed insertion
+- **InsightsCard** — sidebar component for target university/major personalization
+- **RightSidebar** — InsightsCard inserted; events navigate to `/events/:id`; tooltips on verified institutions
+- **EventDetail** page (route `/events/:id`)
+- **Saved** page — now reads from feedStore.saved
+- Logos: Light/Dark mode logos wired in Logo.jsx with theme awareness; favicon updated
+
+## Iteration 5 (Jan 2026) — Super Admin console
+- New isolated `superAdminStore` (zustand+persist) with hardcoded creds `superadmin@usfuturee.com` / `superadmin123`
+- New `SuperAdminGuard` redirects to `/superadmin` when not authenticated
+- New `SuperAdminLayout` — left sidebar nav (Dashboard, Users, Institutions, Ads, Reports, Revenue), brand mark, theme toggle, logout button; responsive mobile nav
+- Pages built (all under `/superadmin/*`):
+  - `Dashboard` — 4 stat cards (Users / Institutions / Revenue / Active Today), recent activity feed, platform health bars
+  - `Users` — searchable + role-filterable table with Suspend/Delete/View actions
+  - `Institutions` — table with Verify (blue tick) / Reject / Suspend / Profile actions; status pill
+  - `Ads` — banner ad cards grid + create modal (title, image upload, target institution, duration); pause/resume/delete
+  - `Reports` — Open/Resolved/All tabs; Dismiss / Remove post / Suspend user actions per report
+  - `Revenue` — payment table with Mark received button; 3 summary stat cards
+- New `adsStore` (zustand+persist) — ads created in admin appear as Sponsored cards between every 2nd post in the regular home feed
+- `App.js` routes wired; `/superadmin` is the only public entrypoint, rest are guarded
+- **No link to `/superadmin` anywhere in the regular app** — direct URL access only
+- All admin pages: dark/light mode, Plus Jakarta Sans, Lucide React icons, full `data-testid` coverage
+- **CSS**: switched body font to Plus Jakarta Sans site-wide; replaced brown dark-mode accent with proper blue (`214 60% 18%` / `214 89% 78%`); added `storyProgress` keyframe for story viewer
 - **feedStore** rewritten: persisted reactions, reactionCounts, comments (threaded), saved[], following{}; new actions `setReaction`, `addComment`, `toggleCommentLike`, `toggleSaved`, `toggleFollow`, `editPost`, `deletePost`
 - **insightsStore** new — persisted `{ university, major }` target with `isRelevantToTarget` helper
 - **StoryViewer** — full-screen modal with auto-advance (5s progress bar), prev/next arrows, ESC/arrow-key controls, hold-to-pause, supports image and video
