@@ -30,7 +30,7 @@ module.exports = {
         primary: {
           DEFAULT: 'hsl(var(--primary))',
           foreground: 'hsl(var(--primary-foreground))',
-          hover: '#3D5AF1'
+          hover: '#E0521F'
         },
         secondary: {
           DEFAULT: 'hsl(var(--secondary))',
@@ -54,6 +54,10 @@ module.exports = {
         flame: {
           DEFAULT: '#F4622E',
           hover: '#E0521F'
+        },
+        royal: {
+          DEFAULT: '#4F6EF7',
+          dark: '#3D5AF1'
         }
       },
       keyframes: {
