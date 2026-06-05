@@ -37,7 +37,16 @@ export default function Login() {
   };
 
   const handleDemoClick = (role) => {
-    console.log("Demo account selected:", role);
+    const account = DEMO_ACCOUNTS.find((a) => a.role === role);
+    if (!account) return;
+    login(account);
+    toast.success(`Welcome, ${account.name}!`);
+    // Teachers and principals land on their portal dashboard, others on home feed
+    if (role === "teacher" || role === "principal") {
+      navigate("/portal");
+    } else {
+      navigate("/");
+    }
   };
 
   return (

@@ -40,6 +40,15 @@ User then specified the full feature set each of these pages must contain.
 - Wired Navbar: bell now opens NotificationsDropdown, chat icon navigates to `/messages`
 - Added `/messages` route in `App.js`
 
+## Iteration 3 (Jan 2026) — Demo logins + sidebar pages
+- Fixed `Login.jsx` demo buttons: clicking Student → `/`, Teacher → `/portal` (Teacher dashboard), Principal → `/portal` (Principal dashboard), Parent → `/`. Each populates the zustand `useAuthStore` with the matching `DEMO_ACCOUNTS` entry (role, name, avatar, headline, institution) and `isAuthenticated = true`. Success toast on each login.
+- Created `/app/frontend/src/pages/Courses.jsx` — 6 course cards with subject, teacher avatar, progress bar, lessons count, gradient backgrounds
+- Created `/app/frontend/src/pages/Saved.jsx` — reuses existing `PostCard` to show saved posts, with proper empty state ("No content yet" + bookmark icon)
+- Created `/app/frontend/src/pages/Trending.jsx` — trending tags strip + PostCards sorted by likes, with #1 / #2 / #3 rank badges
+- Updated `LeftSidebar.jsx` so Courses, Saved, Events, Trending point to their real routes (previously all pointed to `/`)
+- Added `/courses`, `/saved`, `/trending` routes in `App.js` (Events route already existed)
+- `ComingSoon.jsx` is no longer referenced by any active route
+
 ## Backlog / Not Yet Implemented
 - P1: Wire demo-account buttons in `Login.jsx` so they actually authenticate (currently only `console.log`)
 - P1: Real Notifications dropdown from bell icon (spec'd by user but not implemented this iteration)

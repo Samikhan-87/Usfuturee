@@ -6,10 +6,10 @@ import { NAV_SHORTCUTS } from "@/utils/mockData";
 const NAV = [
   { icon: Home, label: "Home", to: "/" },
   { icon: Users, label: "Groups", to: "/groups" },
-  { icon: BookOpen, label: "Courses", to: "/" },
-  { icon: Bookmark, label: "Saved", to: "/" },
-  { icon: Calendar, label: "Events", to: "/" },
-  { icon: TrendingUp, label: "Trending", to: "/" },
+  { icon: BookOpen, label: "Courses", to: "/courses" },
+  { icon: Bookmark, label: "Saved", to: "/saved" },
+  { icon: Calendar, label: "Events", to: "/events" },
+  { icon: TrendingUp, label: "Trending", to: "/trending" },
 ];
 
 export const LeftSidebar = () => {

@@ -14,6 +14,9 @@ import Portal from "@/pages/Portal";
 import Settings from "@/pages/Settings";
 import Institution from "@/pages/Institution";
 import Messages from "@/pages/Messages";
+import Courses from "@/pages/Courses";
+import Saved from "@/pages/Saved";
+import Trending from "@/pages/Trending";
 
 const guarded = (el) => <ProtectedRoute>{el}</ProtectedRoute>;
 
@@ -34,6 +37,9 @@ function App() {
             <Route path="/settings" element={guarded(<Settings />)} />
             <Route path="/institution" element={guarded(<Institution />)} />
             <Route path="/messages" element={guarded(<Messages />)} />
+            <Route path="/courses" element={guarded(<Courses />)} />
+            <Route path="/saved" element={guarded(<Saved />)} />
+            <Route path="/trending" element={guarded(<Trending />)} />
           </Routes>
         </BrowserRouter>
         <Toaster position="top-center" richColors />
