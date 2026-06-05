@@ -49,6 +49,21 @@ User then specified the full feature set each of these pages must contain.
 - Added `/courses`, `/saved`, `/trending` routes in `App.js` (Events route already existed)
 - `ComingSoon.jsx` is no longer referenced by any active route
 
+## Iteration 4 (Jan 2026) — Home feed deep features
+- Installed `react-image-crop` + `emoji-picker-react`
+- **CSS**: switched body font to Plus Jakarta Sans site-wide; replaced brown dark-mode accent with proper blue (`214 60% 18%` / `214 89% 78%`); added `storyProgress` keyframe for story viewer
+- **feedStore** rewritten: persisted reactions, reactionCounts, comments (threaded), saved[], following{}; new actions `setReaction`, `addComment`, `toggleCommentLike`, `toggleSaved`, `toggleFollow`, `editPost`, `deletePost`
+- **insightsStore** new — persisted `{ university, major }` target with `isRelevantToTarget` helper
+- **StoryViewer** — full-screen modal with auto-advance (5s progress bar), prev/next arrows, ESC/arrow-key controls, hold-to-pause, supports image and video
+- **StoriesRow** — clickable stories open viewer; "Your Story" tile opens upload modal (image/video, 2 MB limit, validates and rejects oversized files)
+- **PostCard** (big rewrite): hover Like → 6-emoji reactions popup (👍❤️😂😮😢😡); top reactions chip on stats; inline threaded comments with reply (indented + vertical line) + per-comment like + send; Save toggles bookmark + toast with "Go to Saved"; Share modal (copy link, share to group dropdown, download image); Report modal (Spam/Inappropriate/Harassment/False info/Other + textarea); Edit modal (own posts only, prefilled content + image swap); Delete confirm; "See more / See less" for posts > 220 chars; verified badge only on `author.verified` with `Verified Institution` tooltip; Follow button hidden on own posts and wired to `toggleFollow`; "Relevant to your goal" badge shown when post matches insights target
+- **PostComposer** — image upload now opens a `ReactCrop` UI (free aspect, apply crop → cropped Blob preview, re-crop button); emoji button opens `emoji-picker-react` popover (native style); new posts appear in feed immediately
+- **InsightsCard** — right-sidebar component, target setup modal, suggested groups + relevant events + "students like you follow" institutions; persisted to localStorage
+- **RightSidebar** — InsightsCard inserted between institutions and Upcoming Events; events made clickable navigating to `/events/:id`; tooltips on verified institutions
+- **EventDetail** page (route `/events/:id`) — cover image, category badge, date/time/location/organizer rows, description, Register / Share / Back buttons, "240+ going" counter
+- **Saved** page — now reads from `feedStore.saved` (was static slice); shows real saved posts using `PostCard`
+- All icons across all new/changed components use lucide-react (no custom or AI-made icons remain)
+
 ## Backlog / Not Yet Implemented
 - P1: Wire demo-account buttons in `Login.jsx` so they actually authenticate (currently only `console.log`)
 - P1: Real Notifications dropdown from bell icon (spec'd by user but not implemented this iteration)

@@ -6,7 +6,7 @@
 
 body {
     margin: 0;
-    font-family: "Manrope", sans-serif;
+    font-family: "Plus Jakarta Sans", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
@@ -51,8 +51,8 @@ code {
         --secondary-foreground: 220 14% 91%;
         --muted: 0 0% 16%;
         --muted-foreground: 213 4% 70%;
-        --accent: 18 45% 24%;
-        --accent-foreground: 24 95% 72%;
+        --accent: 214 60% 18%;
+        --accent-foreground: 214 89% 78%;
         --destructive: 0 62% 45%;
         --destructive-foreground: 0 0% 98%;
         --border: 0 0% 18%;
@@ -87,11 +87,19 @@ code {
     .animate-fade-up {
         animation: fadeUp 0.5s ease-out both;
     }
+    .story-progress {
+        animation: storyProgress 5s linear forwards;
+    }
 }
 
 @keyframes fadeUp {
     from { opacity: 0; transform: translateY(12px); }
     to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes storyProgress {
+    from { width: 0%; }
+    to { width: 100%; }
 }
 
 /* glass navbar */

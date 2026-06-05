@@ -17,6 +17,7 @@ import Messages from "@/pages/Messages";
 import Courses from "@/pages/Courses";
 import Saved from "@/pages/Saved";
 import Trending from "@/pages/Trending";
+import EventDetail from "@/pages/EventDetail";
 
 const guarded = (el) => <ProtectedRoute>{el}</ProtectedRoute>;
 
@@ -40,6 +41,7 @@ function App() {
             <Route path="/courses" element={guarded(<Courses />)} />
             <Route path="/saved" element={guarded(<Saved />)} />
             <Route path="/trending" element={guarded(<Trending />)} />
+            <Route path="/events/:id" element={guarded(<EventDetail />)} />
           </Routes>
         </BrowserRouter>
         <Toaster position="top-center" richColors />

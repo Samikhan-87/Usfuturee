@@ -1,9 +1,13 @@
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { Check, Plus, CalendarDays, BadgeCheck } from "lucide-react";
 import { INSTITUTIONS, UPCOMING_EVENTS } from "@/utils/mockData";
+import { InsightsCard } from "@/components/InsightsCard";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 export const RightSidebar = () => {
   const [following, setFollowing] = useState({});
+  const navigate = useNavigate();
 
   const toggle = (id) => setFollowing((f) => ({ ...f, [id]: !f[id] }));
 
@@ -19,7 +23,16 @@ export const RightSidebar = () => {
               <div className="min-w-0 flex-1">
                 <p className="flex items-center gap-1 truncate text-sm font-semibold text-foreground">
                   {inst.name}
-                  {inst.verified && <BadgeCheck className="h-4 w-4 shrink-0 fill-primary text-card" />}
+                  {inst.verified && (
+                    <TooltipProvider delayDuration={150}>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <span><BadgeCheck className="h-4 w-4 shrink-0 fill-primary text-card" /></span>
+                        </TooltipTrigger>
+                        <TooltipContent>Verified Institution</TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                  )}
                 </p>
                 <p className="truncate text-xs text-muted-foreground">{inst.followers} followers</p>
               </div>
@@ -39,6 +52,9 @@ export const RightSidebar = () => {
         </div>
       </div>
 
+      {/* Insights */}
+      <InsightsCard />
+
       {/* Upcoming Events */}
       <div className="rounded-2xl border border-border bg-card p-5">
         <h3 className="mb-4 flex items-center gap-2 font-heading text-base font-bold text-foreground">
@@ -49,6 +65,7 @@ export const RightSidebar = () => {
             <button
               key={ev.id}
               data-testid={`event-${ev.id}`}
+              onClick={() => navigate(`/events/${ev.id}`)}
               className="group flex items-center gap-3 rounded-xl p-2 text-left transition-all duration-200 hover:bg-accent"
             >
               <div className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-accent text-primary">
@@ -64,23 +81,14 @@ export const RightSidebar = () => {
         </div>
       </div>
 
-      {/* Website footer */}
+      {/* Footer */}
       <div className="rounded-2xl border border-border bg-card p-5">
         <div className="flex flex-wrap gap-x-4 gap-y-2 text-sm">
           {["About", "Privacy", "Terms", "Help", "Careers"].map((l) => (
-            <a
-              key={l}
-              href="#"
-              data-testid={`footer-${l.toLowerCase()}-link`}
-              className="text-muted-foreground transition-colors hover:text-primary hover:underline"
-            >
-              {l}
-            </a>
+            <Link key={l} to="/" data-testid={`footer-${l.toLowerCase()}-link`} className="text-muted-foreground transition-colors hover:text-primary hover:underline">{l}</Link>
           ))}
         </div>
-        <p className="mt-3 text-xs text-muted-foreground">
-          Usfuturee © 2026 · Connecting educational communities worldwide.
-        </p>
+        <p className="mt-3 text-xs text-muted-foreground">Usfuturee © 2026 · Connecting educational communities worldwide.</p>
       </div>
     </aside>
   );
