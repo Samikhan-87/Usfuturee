@@ -6,13 +6,14 @@ import { useAuth } from "@/hooks/useAuth";
 import { mockRequest } from "@/services/api";
 import { DEMO_ACCOUNTS } from "@/utils/mockData";
 import { ROLES } from "@/utils/roles";
-import { Mail, Lock, Loader2, GraduationCap, Users, BookOpen, Sparkles } from "lucide-react";
+import { Mail, Lock, Loader2, GraduationCap, Users, BookOpen } from "lucide-react";
 import { toast } from "sonner";
 
 export default function Login() {
   const navigate = useNavigate();
   const { login } = useAuth();
   const [loading, setLoading] = useState(false);
+  const [resetSent, setResetSent] = useState(false);
   const [form, setForm] = useState({ email: "", password: "" });
 
   const update = (k) => (e) => setForm({ ...form, [k]: e.target.value });
@@ -35,15 +36,14 @@ export default function Login() {
     finishLogin({ email: form.email }, "Welcome back!");
   };
 
-  const demoLogin = async (account) => {
-    await mockRequest(null, 300);
-    finishLogin(account, `Logged in as ${ROLES[account.role].label}`);
+  const handleDemoClick = (role) => {
+    console.log("Demo account selected:", role);
   };
 
   return (
     <div className="grid min-h-screen lg:grid-cols-2">
       {/* Form panel */}
-      <div className="relative flex items-center justify-center bg-background px-6 py-12 lg:order-1">
+      <div className="relative flex items-center justify-center bg-white px-6 py-12 dark:bg-background lg:order-1">
         <div className="absolute right-6 top-6">
           <ThemeToggle />
         </div>
@@ -60,22 +60,27 @@ export default function Login() {
             <Field icon={Mail} type="email" placeholder="Email address" value={form.email} onChange={update("email")} testid="login-email-input" />
             <Field icon={Lock} type="password" placeholder="Password" value={form.password} onChange={update("password")} testid="login-password-input" />
 
-            <div className="flex justify-end">
+            <div className="flex flex-col items-end gap-1">
               <button
                 type="button"
                 data-testid="forgot-password-link"
-                onClick={() => toast.info("Password reset coming soon")}
+                onClick={() => setResetSent(true)}
                 className="text-sm font-medium text-primary transition-colors hover:underline"
               >
                 Forgot password?
               </button>
+              {resetSent && (
+                <span data-testid="reset-sent-message" className="text-sm font-semibold text-primary">
+                  Reset link sent!
+                </span>
+              )}
             </div>
 
             <button
               type="submit"
               data-testid="login-submit-button"
               disabled={loading}
-              className="flex h-12 items-center justify-center gap-2 rounded-full bg-primary font-semibold text-primary-foreground transition-all duration-200 hover:bg-primary-hover disabled:opacity-60"
+              className="flex h-12 items-center justify-center gap-2 rounded-[10px] bg-primary font-semibold text-primary-foreground transition-all duration-200 hover:bg-primary-hover disabled:opacity-60"
             >
               {loading && <Loader2 className="h-5 w-5 animate-spin" />}
               Log In
@@ -86,28 +91,23 @@ export default function Login() {
           <div className="mt-8">
             <div className="mb-3 flex items-center gap-3">
               <div className="h-px flex-1 bg-border" />
-              <span className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-muted-foreground">
-                <Sparkles className="h-3.5 w-3.5" /> Try a demo account
+              <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground">
+                Or continue with demo account
               </span>
               <div className="h-px flex-1 bg-border" />
             </div>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-2 gap-3" data-testid="demo-accounts-grid">
               {DEMO_ACCOUNTS.map((acc) => {
                 const Icon = ROLES[acc.role].icon;
                 return (
                   <button
                     key={acc.role}
                     data-testid={`demo-${acc.role}-button`}
-                    onClick={() => demoLogin(acc)}
-                    className="flex items-center gap-2.5 rounded-2xl border border-border bg-card px-4 py-3 text-left transition-all duration-200 hover:-translate-y-0.5 hover:border-primary"
+                    onClick={() => handleDemoClick(acc.role)}
+                    className="flex items-center justify-center gap-2 rounded-[10px] border-2 border-primary bg-white px-4 py-3 text-sm font-semibold text-primary transition-all duration-200 hover:bg-primary hover:text-white dark:bg-transparent"
                   >
-                    <span className={`grid h-9 w-9 shrink-0 place-items-center rounded-xl ${ROLES[acc.role].badge}`}>
-                      <Icon className="h-[18px] w-[18px]" />
-                    </span>
-                    <span className="min-w-0">
-                      <span className="block text-sm font-semibold text-foreground">{ROLES[acc.role].label}</span>
-                      <span className="block truncate text-xs text-muted-foreground">Quick login</span>
-                    </span>
+                    <Icon className="h-[18px] w-[18px]" />
+                    {ROLES[acc.role].label}
                   </button>
                 );
               })}

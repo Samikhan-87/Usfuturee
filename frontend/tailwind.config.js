@@ -8,8 +8,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        heading: ['Outfit', 'sans-serif'],
-        body: ['Manrope', 'sans-serif'],
+        heading: ['Plus Jakarta Sans', 'sans-serif'],
+        body: ['Plus Jakarta Sans', 'sans-serif'],
       },
       borderRadius: {
         lg: 'var(--radius)',
@@ -30,7 +30,7 @@ module.exports = {
         primary: {
           DEFAULT: 'hsl(var(--primary))',
           foreground: 'hsl(var(--primary-foreground))',
-          hover: '#166FE5'
+          hover: '#3D5AF1'
         },
         secondary: {
           DEFAULT: 'hsl(var(--secondary))',
@@ -50,7 +50,11 @@ module.exports = {
         },
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
-        ring: 'hsl(var(--ring))'
+        ring: 'hsl(var(--ring))',
+        flame: {
+          DEFAULT: '#F4622E',
+          hover: '#E0521F'
+        }
       },
       keyframes: {
         'accordion-down': {
