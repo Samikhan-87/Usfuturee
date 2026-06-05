@@ -4,6 +4,7 @@ import { Search, Home, Users, Calendar, Bot, MessageCircle, Bell, LayoutGrid, Lo
 import { Logo } from "@/components/Logo";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { useAuth } from "@/hooks/useAuth";
+import { NotificationsDropdown } from "@/components/NotificationsDropdown";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -88,16 +89,27 @@ export const Navbar = () => {
             <Search className="h-5 w-5" />
           </button>
 
-          <IconButton testid="navbar-chat-button" icon={MessageCircle} onClick={() => {}} />
-          <div className="relative">
-            <IconButton testid="navbar-notifications-button" icon={Bell} onClick={() => {}} />
-            <span
-              data-testid="notifications-badge"
-              className="absolute -right-0.5 -top-0.5 grid h-5 min-w-5 place-items-center rounded-full bg-destructive px-1 text-[10px] font-bold text-destructive-foreground"
-            >
-              3
-            </span>
-          </div>
+          <IconButton testid="navbar-chat-button" icon={MessageCircle} onClick={() => navigate("/messages")} />
+          <NotificationsDropdown>
+            {(unread) => (
+              <button
+                type="button"
+                data-testid="navbar-notifications-button"
+                className="relative grid h-10 w-10 place-items-center rounded-full bg-secondary text-foreground transition-all duration-200 hover:bg-accent hover:text-primary"
+                aria-label="Notifications"
+              >
+                <Bell className="h-5 w-5" />
+                {unread > 0 && (
+                  <span
+                    data-testid="notifications-badge"
+                    className="absolute -right-0.5 -top-0.5 grid h-5 min-w-5 place-items-center rounded-full bg-destructive px-1 text-[10px] font-bold text-destructive-foreground"
+                  >
+                    {unread}
+                  </span>
+                )}
+              </button>
+            )}
+          </NotificationsDropdown>
 
           <button
             data-testid="portal-button"

@@ -34,6 +34,12 @@ User then specified the full feature set each of these pages must contain.
 - All four pages: dark/light mode, responsive, Plus Jakarta Sans heading font, sonner bottom-right toasts, full `data-testid` coverage
 - Frontend now compiles with **0 errors** (`webpack compiled successfully`)
 
+## Iteration 2 (Jan 2026) — Notifications + Messaging
+- Created `/app/frontend/src/components/NotificationsDropdown.jsx` — Radix Popover from bell icon, All/Unread tabs, 6 notification types (follower, like, comment, event, fee, assignment) with avatar + type-icon badge, timestamps, blue unread dot, "Mark all as read", clicking navigates to relevant page; live unread count drives bell badge
+- Created `/app/frontend/src/pages/Messages.jsx` (route `/messages`) — left conversation list with search + unread badges + online dots; right active conversation with header (online status), date-grouped messages (sent blue right / received gray left), timestamps, input with Enter-to-send. Mobile shows one panel at a time with back button. Empty state "Select a conversation to start messaging"
+- Wired Navbar: bell now opens NotificationsDropdown, chat icon navigates to `/messages`
+- Added `/messages` route in `App.js`
+
 ## Backlog / Not Yet Implemented
 - P1: Wire demo-account buttons in `Login.jsx` so they actually authenticate (currently only `console.log`)
 - P1: Real Notifications dropdown from bell icon (spec'd by user but not implemented this iteration)

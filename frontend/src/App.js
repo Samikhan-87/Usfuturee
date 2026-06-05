@@ -13,6 +13,7 @@ import AIChat from "@/pages/AIChat";
 import Portal from "@/pages/Portal";
 import Settings from "@/pages/Settings";
 import Institution from "@/pages/Institution";
+import Messages from "@/pages/Messages";
 
 const guarded = (el) => <ProtectedRoute>{el}</ProtectedRoute>;
 
@@ -32,6 +33,7 @@ function App() {
             <Route path="/portal" element={guarded(<Portal />)} />
             <Route path="/settings" element={guarded(<Settings />)} />
             <Route path="/institution" element={guarded(<Institution />)} />
+            <Route path="/messages" element={guarded(<Messages />)} />
           </Routes>
         </BrowserRouter>
         <Toaster position="top-center" richColors />
