@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import {
-  Dialog, DialogContent, DialogHeader, DialogTitle,
+  Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription,
 } from "@/components/ui/dialog";
 import {
   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
@@ -174,6 +174,7 @@ export default function Groups() {
         <DialogContent className="rounded-2xl sm:max-w-lg" data-testid="create-group-modal">
           <DialogHeader>
             <DialogTitle className="font-heading text-xl">Create a Group</DialogTitle>
+            <DialogDescription className="sr-only">Fill in the details to create a new group.</DialogDescription>
           </DialogHeader>
 
           {form.cover ? (

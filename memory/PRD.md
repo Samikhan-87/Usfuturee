@@ -36,7 +36,17 @@ Create "Usfuturee", a modern educational social platform. Stack requested: React
 - Home feed: stories ("Your Story" + image stories), create-post box → modal (textarea + image upload preview), feed cards with institution avatar, verified blue tick, follow toggle, 3-dot menu (save/hide/report)
 - Profile: cover + Edit Cover, overlapping avatar + role badge, Edit Profile + report dropdown, bio box, tabs (Posts/About/Followers w/ follow-back), Achievements sidebar box
 
+## Implemented (2026-06-05 — Update 3)
+- Reverted to blue (#1877F2) primary + gradient hero panels; renamed brand EduConnect -> Usfuturee (U mark)
+- Global font switched to Plus Jakarta Sans; Login polished (white form panel, 10px button, inline "Reset link sent!", 2x2 outlined demo buttons that console.log role)
+- BACKEND (first real integration): POST /api/chat/edubot — EduBot assistant via Claude Sonnet 4.6 (Emergent LLM key in backend/.env), messages persisted to MongoDB
+- Groups page: tabs Posts / Your Groups (public-private badges, View+settings) / Discover (search, suggested+Join, category pills) + Create Group modal (name, desc, category, public/private toggle, cover upload)
+- Events page: Upcoming/Past tabs, event cards (category badge, date/time/location, organizer, Register+Details), search, Filter popover (region/institution/category), principal-only "+ Create Event" modal
+- AI Chat (EduBot): suggested questions panel + chat UI, real Claude replies, thumbs up/down, clear chat
+- Role inferred from demo email so principal@usfuturee.com unlocks principal-only UI
+- Tested by testing agent: 100% backend + frontend pass, no bugs
+
 ## Backlog
-- P0: Wire FastAPI + MongoDB backend (real auth, posts, groups, follows) — currently all MOCK/frontend-only
-- P1: Real comments thread, persist posts & image uploads (object storage), live notifications, messaging
-- P2: Build out Events & AI Chat pages (currently Coming Soon placeholders), search results, profile editing
+- P0: Replace remaining mock data/auth with real FastAPI + MongoDB (real auth, posts, groups, events, follows)
+- P1: EduBot chat history retrieval endpoint, rate limiting/auth on chat; persist created groups/events
+- P2: Build Courses/Saved/Trending pages, messaging, notifications

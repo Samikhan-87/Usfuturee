@@ -14,7 +14,7 @@ import {
   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
 } from "@/components/ui/select";
 import {
-  Dialog, DialogContent, DialogHeader, DialogTitle,
+  Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription,
 } from "@/components/ui/dialog";
 import { toast } from "sonner";
 
@@ -185,6 +185,7 @@ export default function Events() {
         <DialogContent className="rounded-2xl sm:max-w-lg" data-testid="create-event-modal">
           <DialogHeader>
             <DialogTitle className="font-heading text-xl">Create an Event</DialogTitle>
+            <DialogDescription className="sr-only">Fill in the details to create a new event.</DialogDescription>
           </DialogHeader>
           {form.cover ? (
             <div className="relative overflow-hidden rounded-2xl border border-border">
