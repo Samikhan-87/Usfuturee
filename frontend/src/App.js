@@ -10,6 +10,9 @@ import Profile from "@/pages/Profile";
 import Groups from "@/pages/Groups";
 import Events from "@/pages/Events";
 import AIChat from "@/pages/AIChat";
+import Portal from "@/pages/Portal";
+import Settings from "@/pages/Settings";
+import Institution from "@/pages/Institution";
 
 const guarded = (el) => <ProtectedRoute>{el}</ProtectedRoute>;
 
@@ -26,6 +29,9 @@ function App() {
             <Route path="/groups" element={guarded(<Groups />)} />
             <Route path="/events" element={guarded(<Events />)} />
             <Route path="/ai-chat" element={guarded(<AIChat />)} />
+            <Route path="/portal" element={guarded(<Portal />)} />
+            <Route path="/settings" element={guarded(<Settings />)} />
+            <Route path="/institution" element={guarded(<Institution />)} />
           </Routes>
         </BrowserRouter>
         <Toaster position="top-center" richColors />

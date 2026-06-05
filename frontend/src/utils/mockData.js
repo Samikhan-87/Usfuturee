@@ -239,3 +239,129 @@ export const EDUBOT_QUESTIONS = [
   "How do I apply for a scholarship?",
   "What is the school calendar for this year?",
 ];
+
+// ===================== STUDENT PORTAL =====================
+export const STUDENT_TODAY_SCHEDULE = [
+  { id: "ts1", subject: "Calculus II", room: "Room 204", time: "09:00 AM" },
+  { id: "ts2", subject: "Physics Lab", room: "Lab 3", time: "11:00 AM" },
+  { id: "ts3", subject: "English Literature", room: "Room 112", time: "02:00 PM" },
+];
+export const STUDENT_ANNOUNCEMENTS = [
+  { id: "an1", teacher: "Mr. Okafor", subject: "Physics", message: "Lab report deadline extended to Friday. Submit via the portal.", time: "1h" },
+  { id: "an2", teacher: "Ms. Bennett", subject: "Mathematics", message: "Surprise quiz on integration next Monday. Review chapter 7.", time: "4h" },
+  { id: "an3", teacher: "Dr. Lee", subject: "Chemistry", message: "Great work on the midterm — class average was 84%! 🎉", time: "1d" },
+];
+export const STUDENT_ASSIGNMENTS = [
+  { id: "as1", subject: "Mathematics", title: "Integration Problem Set 4", due: "Jun 10, 2026", status: "Pending" },
+  { id: "as2", subject: "Physics", title: "Projectile Motion Lab Report", due: "Jun 08, 2026", status: "Submitted" },
+  { id: "as3", subject: "English", title: "Essay: Modern Poetry Analysis", due: "Jun 05, 2026", status: "Late" },
+  { id: "as4", subject: "Chemistry", title: "Organic Reactions Worksheet", due: "Jun 12, 2026", status: "Pending" },
+];
+export const STUDENT_TESTS = [
+  {
+    id: "t1", subject: "Mathematics", date: "Jun 14, 2026", duration: "30 min", marks: 20,
+    questions: [
+      { q: "What is the derivative of x²?", options: ["2x", "x", "2", "x²"], answer: 0 },
+      { q: "∫ 2x dx = ?", options: ["x² + C", "2 + C", "x + C", "2x² + C"], answer: 0 },
+      { q: "What is the value of π (approx)?", options: ["3.14", "2.71", "1.61", "4.13"], answer: 0 },
+      { q: "Solve: 5! = ?", options: ["120", "25", "60", "100"], answer: 0 },
+    ],
+  },
+  {
+    id: "t2", subject: "Physics", date: "Jun 18, 2026", duration: "45 min", marks: 30,
+    questions: [
+      { q: "Unit of force?", options: ["Newton", "Joule", "Watt", "Pascal"], answer: 0 },
+      { q: "Speed of light (approx)?", options: ["3×10⁸ m/s", "3×10⁶ m/s", "3×10⁵ m/s", "3×10¹⁰ m/s"], answer: 0 },
+      { q: "Acceleration due to gravity?", options: ["9.8 m/s²", "8.9 m/s²", "10.8 m/s²", "9.0 m/s²"], answer: 0 },
+    ],
+  },
+];
+export const STUDENT_FEES = [
+  { id: "fe1", item: "Tuition Fee — Semester 2", amount: 1200, due: "Jun 20, 2026", status: "Pending" },
+  { id: "fe2", item: "Laboratory Fee", amount: 150, due: "Jun 20, 2026", status: "Pending" },
+  { id: "fe3", item: "Library & Resources", amount: 80, due: "Jun 20, 2026", status: "Pending" },
+];
+
+// ===================== TEACHER PORTAL =====================
+export const TEACHER_CLASSES_TODAY = [
+  { id: "tc1", subject: "Physics — Grade 11", room: "Lab 3", time: "09:00 AM" },
+  { id: "tc2", subject: "Physics — Grade 12", room: "Room 204", time: "11:30 AM" },
+  { id: "tc3", subject: "Science Club", room: "Auditorium", time: "03:00 PM" },
+];
+export const TEACHER_ASSIGNMENT_STATUS = [
+  { id: "ta1", title: "Projectile Motion Lab", subject: "Physics", submitted: 24, total: 32 },
+  { id: "ta2", title: "Newton's Laws Worksheet", subject: "Physics", submitted: 30, total: 32 },
+  { id: "ta3", title: "Optics Problem Set", subject: "Physics", submitted: 12, total: 28 },
+];
+export const TEACHER_MESSAGES = [
+  { id: "tm1", from: "Principal Bennett", role: "principal", message: "Staff meeting moved to Thursday 4 PM.", time: "2h" },
+  { id: "tm2", from: "Parent — J. Carter", role: "parent", message: "Could we schedule a quick call about Liam's progress?", time: "5h" },
+  { id: "tm3", from: "Parent — A. Smith", role: "parent", message: "Thank you for the extra help sessions!", time: "1d" },
+];
+export const TEACHER_GRADING_STUDENTS = [
+  { id: "gs1", name: "Liam Chen", file: "liam_lab_report.pdf" },
+  { id: "gs2", name: "Emma Davis", file: "emma_lab_report.pdf" },
+  { id: "gs3", name: "Carlos Mendez", file: "carlos_lab_report.pdf" },
+  { id: "gs4", name: "Priya Sharma", file: "priya_lab_report.pdf" },
+  { id: "gs5", name: "Noah Williams", file: "noah_lab_report.pdf" },
+];
+export const TEACHER_WEEK_DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri"];
+export const TEACHER_PERIODS = ["09:00", "10:30", "12:00", "02:00"];
+export const TEACHER_SCHEDULE = {
+  "Mon-09:00": { subject: "Physics G11", room: "Lab 3" },
+  "Mon-12:00": { subject: "Physics G12", room: "R204" },
+  "Tue-10:30": { subject: "Science Club", room: "Aud." },
+  "Wed-09:00": { subject: "Physics G12", room: "R204" },
+  "Wed-02:00": { subject: "Physics G11", room: "Lab 3" },
+  "Thu-12:00": { subject: "Physics G11", room: "Lab 3" },
+  "Fri-10:30": { subject: "Physics G12", room: "R204" },
+};
+
+// ===================== PRINCIPAL PORTAL =====================
+export const PRINCIPAL_STUDENTS = [
+  { id: "ps1", name: "Liam Chen", grade: "Grade 11", feeStatus: "Paid" },
+  { id: "ps2", name: "Emma Davis", grade: "Grade 10", feeStatus: "Pending" },
+  { id: "ps3", name: "Carlos Mendez", grade: "Grade 12", feeStatus: "Paid" },
+  { id: "ps4", name: "Priya Sharma", grade: "Grade 11", feeStatus: "Overdue" },
+  { id: "ps5", name: "Noah Williams", grade: "Grade 9", feeStatus: "Pending" },
+];
+export const PRINCIPAL_TEACHERS = [
+  { id: "pt1", name: "David Okafor", subject: "Physics" },
+  { id: "pt2", name: "Maria Lopez", subject: "Mathematics" },
+  { id: "pt3", name: "Dr. Susan Lee", subject: "Chemistry" },
+  { id: "pt4", name: "James Patel", subject: "English Literature" },
+];
+export const PRINCIPAL_ADMISSIONS = [
+  { id: "ad1", name: "Sophie Turner", classApplied: "Grade 9", date: "Jun 02, 2026", status: "Pending" },
+  { id: "ad2", name: "Marcus Johnson", classApplied: "Grade 11", date: "Jun 03, 2026", status: "Pending" },
+  { id: "ad3", name: "Aisha Rahman", classApplied: "Grade 10", date: "Jun 04, 2026", status: "Pending" },
+];
+export const PRINCIPAL_FEE_CLASSES = [
+  { id: "fc1", grade: "Grade 9", amount: 1000 },
+  { id: "fc2", grade: "Grade 10", amount: 1100 },
+  { id: "fc3", grade: "Grade 11", amount: 1200 },
+  { id: "fc4", grade: "Grade 12", amount: 1300 },
+];
+
+// ===================== INSTITUTION PROFILE =====================
+export const INSTITUTION = {
+  name: "Lincoln Academy",
+  verified: true,
+  banner: BANNER,
+  avatar: AVATARS.aisha,
+  followers: "84.2k",
+  tagline: "Excellence in Education since 1962",
+  message: "Welcome to Lincoln Academy! We nurture curious minds and future leaders. Our doors are open for the 2026–27 admissions. Join a community that values knowledge, character, and creativity.",
+  classes: ["Grade 9", "Grade 10", "Grade 11", "Grade 12"],
+  admissionFee: 250,
+  books: [
+    { id: "bk1", title: "Advanced Calculus", img: IMG_RESEARCH },
+    { id: "bk2", title: "Modern Physics", img: IMG_STUDENT },
+    { id: "bk3", title: "World Literature", img: IMG_DESIGN },
+    { id: "bk4", title: "Organic Chemistry", img: IMG_SPORT },
+  ],
+  uniforms: [
+    { id: "uf1", label: "Formal Uniform", img: IMG_DESIGN },
+    { id: "uf2", label: "Sports Kit", img: IMG_SPORT },
+  ],
+};

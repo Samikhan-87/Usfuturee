@@ -101,7 +101,7 @@ export const Navbar = () => {
 
           <button
             data-testid="portal-button"
-            onClick={() => navigate("/groups")}
+            onClick={() => navigate("/portal")}
             className="hidden items-center gap-2 rounded-full border border-primary px-4 py-2 text-sm font-semibold text-primary transition-all duration-200 hover:bg-primary hover:text-primary-foreground sm:flex"
           >
             <LayoutGrid className="h-4 w-4" /> Portal
@@ -129,6 +129,9 @@ export const Navbar = () => {
               </DropdownMenuItem>
               <DropdownMenuItem data-testid="menu-groups-link" onClick={() => navigate("/groups")} className="cursor-pointer">
                 My Groups
+              </DropdownMenuItem>
+              <DropdownMenuItem data-testid="menu-settings-link" onClick={() => navigate("/settings")} className="cursor-pointer">
+                Settings
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem data-testid="menu-logout-button" onClick={handleLogout} className="cursor-pointer text-destructive focus:text-destructive">
