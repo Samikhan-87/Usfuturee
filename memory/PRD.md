@@ -28,7 +28,15 @@ Create "Usfuturee", a modern educational social platform. Stack requested: React
 ## MOCKED / NOT REAL
 - All auth & data are frontend-only mock (no FastAPI/MongoDB backend). Posts/groups reset on reload (in-memory except theme & auth session).
 
+## Implemented (2026-06-05 — Update 2)
+- Auth: role-aware Zustand store (user, role, token, isAuthenticated, login, logout)
+- Login: split-screen branding ("Welcome to Usfuturee"), forgot-password, 4 demo accounts (Student/Teacher/Principal/Parent one-click login), link to signup
+- Signup: role selector (Student/Teacher/Principal), name/email/institution/password/confirm with match validation
+- Layout: EduConnect navbar (EC mark, nav tabs Home/Groups/Events/AI Chat, desktop search + mobile search icon, chat, notifications w/ badge, Portal btn, profile menu, theme toggle, mobile hamburger). Right sidebar: Follow Institutions, Upcoming Events, footer links
+- Home feed: stories ("Your Story" + image stories), create-post box → modal (textarea + image upload preview), feed cards with institution avatar, verified blue tick, follow toggle, 3-dot menu (save/hide/report)
+- Profile: cover + Edit Cover, overlapping avatar + role badge, Edit Profile + report dropdown, bio box, tabs (Posts/About/Followers w/ follow-back), Achievements sidebar box
+
 ## Backlog
-- P0: Wire FastAPI + MongoDB backend (real auth, posts, groups, follows)
-- P1: Comments thread, image upload (object storage), notifications, messaging
-- P2: Courses module, search results page, profile editing
+- P0: Wire FastAPI + MongoDB backend (real auth, posts, groups, follows) — currently all MOCK/frontend-only
+- P1: Real comments thread, persist posts & image uploads (object storage), live notifications, messaging
+- P2: Build out Events & AI Chat pages (currently Coming Soon placeholders), search results, profile editing

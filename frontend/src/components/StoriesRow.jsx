@@ -18,7 +18,7 @@ export const StoriesRow = () => {
         <div className="absolute left-1/2 top-28 grid h-9 w-9 -translate-x-1/2 place-items-center rounded-full border-4 border-card bg-primary text-primary-foreground">
           <Plus className="h-4 w-4" />
         </div>
-        <p className="mt-5 text-center text-xs font-semibold text-foreground">Create Story</p>
+        <p className="mt-5 text-center text-xs font-semibold text-foreground">Your Story</p>
       </button>
 
       {STORIES.map((s) => (
