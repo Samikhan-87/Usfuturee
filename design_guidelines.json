@@ -1,0 +1,93 @@
+{
+  "theme": "Light mode by default, toggleable Dark mode",
+  "archetype": "Hybrid: Archetype 3 (Pastel & Soft surfaces) + Archetype 4 (Swiss & High-Contrast structure)",
+  "design_philosophy": "A modern, Facebook-inspired educational social network. Focuses on clarity, generous spacing, and a welcoming 'love-at-first-sight' aesthetic. Uses primary blue for high contrast against pristine white (light mode) and deep dark (dark mode) backgrounds. Rejects generic corporate aesthetics in favor of crisp, organic interactions.",
+  "colors": {
+    "primary": "#1877F2",
+    "primary_hover": "#166FE5",
+    "light_mode": {
+      "background": "#F4F5F7",
+      "surface_feed": "#F4F5F7",
+      "surface_card": "#FFFFFF",
+      "text_primary": "#050505",
+      "text_secondary": "#65676B",
+      "border": "#E4E6EB",
+      "input_bg": "#F0F2F5"
+    },
+    "dark_mode": {
+      "background": "#0F0F0F",
+      "surface_feed": "#0F0F0F",
+      "surface_card": "#1C1C1C",
+      "text_primary": "#E4E6EB",
+      "text_secondary": "#B0B3B8",
+      "border": "#2D2D2D",
+      "input_bg": "#3A3B3C"
+    }
+  },
+  "typography": {
+    "font_family": {
+      "heading": "Outfit, sans-serif",
+      "body": "Manrope, sans-serif",
+      "imports": "@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700;800;900&display=swap');"
+    },
+    "rules": {
+      "h1": "text-4xl sm:text-5xl font-black tracking-tighter",
+      "h2": "text-2xl sm:text-3xl font-bold tracking-tight",
+      "h3": "text-xl sm:text-2xl font-semibold",
+      "body": "text-base font-normal leading-relaxed",
+      "labels": "text-xs font-bold uppercase tracking-widest"
+    }
+  },
+  "spacing_and_layout": {
+    "general": "Use generous padding. Cards should feel breathable.",
+    "grid_system": "10-column layout on large screens. Left Sidebar: 2 cols, Feed: 5 cols, Right Sidebar: 3 cols. Add a max-width container (max-w-7xl) to keep it contained on ultra-wide monitors.",
+    "card_padding": "p-5 sm:p-6",
+    "gap": "gap-6"
+  },
+  "components": {
+    "buttons": "Rounded-full or rounded-xl, prominent primary button with #1877F2, soft hover transitions, no harsh shadows. Use crisp 1px borders for secondary buttons.",
+    "cards": "Subtle roundness (rounded-2xl). Light mode: flat with 1px border. Dark mode: #1C1C1C background, 1px #2D2D2D border.",
+    "navbar": "Sticky at top (z-50). Glassmorphism in Light mode (bg-white/80 backdrop-blur-xl), Solid or subtle glass in Dark mode (bg-[#0F0F0F]/80 backdrop-blur-xl). Bottom border 1px.",
+    "sidebars": "Fixed positioning. Left: Navigation icons and groups. Right: Trending and suggestions.",
+    "post_composer": "Input area should have generous padding, rounded-2xl, subtle focus ring (ring-2 ring-[#1877F2] ring-offset-2).",
+    "avatars": "Perfect circles. Add a 2px offset ring on hover (using #1877F2)."
+  },
+  "motion_and_interaction": {
+    "hover_states": "Micro-lift (-translate-y-0.5) on cards, background darkening on buttons.",
+    "transitions": "transition-all duration-200 ease-out",
+    "focus": "High contrast ring on all interactive elements for accessibility."
+  },
+  "testing": {
+    "data_attributes": "All interactive and key informational elements MUST include a data-testid attribute (e.g., data-testid='login-button', data-testid='post-like-button')."
+  },
+  "media_assets": {
+    "avatars": [
+      "https://images.pexels.com/photos/6338370/pexels-photo-6338370.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "https://images.unsplash.com/photo-1596688787955-72a75ec303b4?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxOTB8MHwxfHNlYXJjaHwxfHxkaXZlcnNlJTIweW91bmclMjBhZHVsdHMlMjBwb3J0cmFpdHN8ZW58MHx8fHwxNzgwNjg4Nzg0fDA&ixlib=rb-4.1.0&q=85",
+      "https://images.pexels.com/photos/8764912/pexels-photo-8764912.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+    ],
+    "feed_posts": [
+      "https://images.unsplash.com/photo-1515378960530-7c0da6231fb1?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1ODF8MHwxfHNlYXJjaHwxfHxzdHVkZW50JTIwc3R1ZHlpbmclMjBsYXB0b3B8ZW58MHx8fHwxNzgwNjg4NzgzfDA&ixlib=rb-4.1.0&q=85",
+      "https://images.pexels.com/photos/7683899/pexels-photo-7683899.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "https://images.pexels.com/photos/8199249/pexels-photo-8199249.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+    ],
+    "community_banners": [
+      "https://images.unsplash.com/photo-1775933802859-27889463db79?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzV8MHwxfHNlYXJjaHwzfHxtb2Rlcm4lMjB1bml2ZXJzaXR5JTIwY2FtcHVzfGVufDB8fHx8MTc4MDY4ODc4M3ww&ixlib=rb-4.1.0&q=85",
+      "https://images.pexels.com/photos/31656148/pexels-photo-31656148.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+    ]
+  },
+  "instructions_to_main_agent": [
+    "Initialize React app with Vite and Tailwind v4.",
+    "Install and configure lucide-react for all iconography.",
+    "Configure Tailwind for dark mode using the 'class' strategy.",
+    "Implement a ThemeProvider using Zustand. Persist the theme state in localStorage. Default to light mode.",
+    "Implement Axios instance setup in src/services (even though no backend, mock API calls to show realistic loading states).",
+    "Configure Shadcn UI primitives. Customize the global CSS to use the specific colors defined in the colors block.",
+    "Inject fonts (Outfit for Headings, Manrope for Body text) in index.css.",
+    "Construct the core Layout: Top Navbar (sticky, with search, theme toggle, and profile), Left Sidebar (fixed, navigation), Middle Feed, Right Sidebar (fixed, suggestions). Total max width bounded.",
+    "Implement Login/Register screen first. Keep it sleek, using one of the feed_posts images as a subtle background or split-screen visual.",
+    "Build the Home Feed. Include Stories/Highlights row at the top, a post composer card, and feed item cards.",
+    "Build User Profile and Study Groups pages using React Router v6.",
+    "Add 'data-testid' attributes to EVERY interactive element and critical UI text for automated testing."
+  ]
+}
