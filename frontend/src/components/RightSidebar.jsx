@@ -12,7 +12,7 @@ export const RightSidebar = () => {
   const toggle = (id) => setFollowing((f) => ({ ...f, [id]: !f[id] }));
 
   return (
-    <aside className="sticky top-20 hidden h-fit flex-col gap-6 xl:flex" data-testid="right-sidebar">
+    <aside className="sticky top-20 flex h-fit flex-col gap-6" data-testid="right-sidebar">
       {/* Follow Institution */}
       <div className="rounded-2xl border border-border bg-card p-5">
         <h3 className="mb-4 font-heading text-base font-bold text-foreground">Follow Institutions</h3>

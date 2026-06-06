@@ -81,7 +81,7 @@ export default function Groups() {
 
           {/* Your Groups */}
           <TabsContent value="yours" className="mt-6" data-testid="groups-yours">
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {YOUR_GROUPS.map((g) => (
                 <div key={g.id} data-testid={`your-group-${g.id}`} className="group overflow-hidden rounded-2xl border border-border bg-card transition-all duration-200 hover:-translate-y-1">
                   <div className="relative h-28">

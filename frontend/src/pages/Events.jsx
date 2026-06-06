@@ -226,7 +226,7 @@ const EventGrid = ({ list, past }) => {
   if (list.length === 0)
     return <p className="rounded-2xl border border-dashed border-border py-12 text-center text-muted-foreground" data-testid="no-events">No events match your filters.</p>;
   return (
-    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
       {list.map((ev) => <EventCard key={ev.id} ev={ev} past={past} />)}
     </div>
   );

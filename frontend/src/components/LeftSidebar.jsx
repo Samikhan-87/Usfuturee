@@ -17,7 +17,7 @@ export const LeftSidebar = () => {
   const location = useLocation();
 
   return (
-    <aside className="sticky top-20 hidden h-fit flex-col gap-1 lg:flex" data-testid="left-sidebar">
+    <aside className="sticky top-20 flex h-fit flex-col gap-1" data-testid="left-sidebar">
       <Link
         to="/profile"
         data-testid="sidebar-profile-link"
