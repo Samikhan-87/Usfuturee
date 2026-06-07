@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { MainLayout } from "@/layouts/MainLayout";
 import { useAuth } from "@/hooks/useAuth";
 import {
@@ -24,38 +25,49 @@ const CAT_STYLES = {
   Cultural: "bg-violet-500/10 text-violet-600 dark:text-violet-400",
 };
 
-const EventCard = ({ ev, past }) => (
-  <div data-testid={`event-${ev.id}`} className="group overflow-hidden rounded-2xl border border-border bg-card transition-all duration-200 hover:-translate-y-1">
-    <div className="relative h-40">
-      <img src={ev.cover} alt={ev.title} className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105" />
-      <span className={`absolute left-3 top-3 rounded-full px-3 py-1 text-xs font-bold ${CAT_STYLES[ev.category]}`}>{ev.category}</span>
-    </div>
-    <div className="p-5">
-      <h3 className="font-heading text-lg font-bold text-foreground">{ev.title}</h3>
-      <div className="mt-3 flex flex-col gap-1.5 text-sm text-muted-foreground">
-        <span className="flex items-center gap-2"><CalendarDays className="h-4 w-4" /> {ev.date}</span>
-        <span className="flex items-center gap-2"><Clock className="h-4 w-4" /> {ev.time}</span>
-        <span className="flex items-center gap-2"><MapPin className="h-4 w-4" /> {ev.location}</span>
+const EventCard = ({ ev, past }) => {
+  const navigate = useNavigate();
+  return (
+    <div
+      data-testid={`event-${ev.id}`}
+      onClick={() => navigate(`/events/${ev.id}`)}
+      className="group cursor-pointer overflow-hidden rounded-2xl border border-border bg-card transition-all duration-200 hover:-translate-y-1"
+    >
+      <div className="relative h-40">
+        <img src={ev.cover} alt={ev.title} className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105" />
+        <span className={`absolute left-3 top-3 rounded-full px-3 py-1 text-xs font-bold ${CAT_STYLES[ev.category]}`}>{ev.category}</span>
       </div>
-      <p className="mt-3 text-xs font-medium text-muted-foreground">
-        Organized by: <span className="text-foreground">{ev.organizer}</span>
-      </p>
-      <div className="mt-4 flex items-center gap-3">
-        <button
-          data-testid={`register-${ev.id}`}
-          disabled={past}
-          onClick={() => toast.success(`Registered for ${ev.title}!`)}
-          className="flex-1 rounded-full bg-primary py-2.5 text-sm font-semibold text-primary-foreground transition-all duration-200 hover:bg-primary-hover disabled:opacity-40"
-        >
-          {past ? "Ended" : "Register"}
-        </button>
-        <button data-testid={`details-${ev.id}`} className="text-sm font-semibold text-primary transition-colors hover:underline">
-          Details
-        </button>
+      <div className="p-5">
+        <h3 className="font-heading text-lg font-bold text-foreground">{ev.title}</h3>
+        <div className="mt-3 flex flex-col gap-1.5 text-sm text-muted-foreground">
+          <span className="flex items-center gap-2"><CalendarDays className="h-4 w-4" /> {ev.date}</span>
+          <span className="flex items-center gap-2"><Clock className="h-4 w-4" /> {ev.time}</span>
+          <span className="flex items-center gap-2"><MapPin className="h-4 w-4" /> {ev.location}</span>
+        </div>
+        <p className="mt-3 text-xs font-medium text-muted-foreground">
+          Organized by: <span className="text-foreground">{ev.organizer}</span>
+        </p>
+        <div className="mt-4 flex items-center gap-3">
+          <button
+            data-testid={`register-${ev.id}`}
+            disabled={past}
+            onClick={(e) => { e.stopPropagation(); toast.success(`Registered for ${ev.title}!`); }}
+            className="flex-1 rounded-full bg-primary py-2.5 text-sm font-semibold text-primary-foreground transition-all duration-200 hover:bg-primary/90 disabled:opacity-40"
+          >
+            {past ? "Ended" : "Register"}
+          </button>
+          <button
+            data-testid={`details-${ev.id}`}
+            onClick={(e) => { e.stopPropagation(); navigate(`/events/${ev.id}`); }}
+            className="text-sm font-semibold text-primary transition-colors hover:underline"
+          >
+            Details
+          </button>
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default function Events() {
   const { role } = useAuth();
@@ -226,7 +238,7 @@ const EventGrid = ({ list, past }) => {
   if (list.length === 0)
     return <p className="rounded-2xl border border-dashed border-border py-12 text-center text-muted-foreground" data-testid="no-events">No events match your filters.</p>;
   return (
-    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
       {list.map((ev) => <EventCard key={ev.id} ev={ev} past={past} />)}
     </div>
   );

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { ThumbsUp, MessageCircle, Share2, MoreHorizontal, Bookmark, BadgeCheck, Plus, Check, Flag, EyeOff } from "lucide-react";
 import { useFeedStore } from "@/store/feedStore";
 import {
@@ -7,10 +8,12 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { toast } from "sonner";
 
 export const PostCard = ({ post, index = 0 }) => {
   const toggleLike = useFeedStore((s) => s.toggleLike);
   const [following, setFollowing] = useState(post.following);
+  const navigate = useNavigate();
 
   return (
     <article
@@ -23,7 +26,8 @@ export const PostCard = ({ post, index = 0 }) => {
         <img
           src={post.author.avatar}
           alt={post.author.name}
-          className="h-11 w-11 rounded-full object-cover ring-2 ring-transparent transition-all duration-200 hover:ring-primary"
+          onClick={() => navigate(`/posts/${post.id}`)}
+          className="h-11 w-11 cursor-pointer rounded-full object-cover ring-2 ring-transparent transition-all duration-200 hover:ring-primary"
         />
         <div className="min-w-0 flex-1">
           <p className="flex items-center gap-1 font-semibold text-foreground">
@@ -63,9 +67,15 @@ export const PostCard = ({ post, index = 0 }) => {
       </div>
 
       {/* Content */}
-      {post.content && <p className="px-5 pb-4 text-[15px] leading-relaxed text-foreground">{post.content}</p>}
+      {post.content && (
+        <p onClick={() => navigate(`/posts/${post.id}`)} className="cursor-pointer px-5 pb-4 text-[15px] leading-relaxed text-foreground hover:text-primary/80 transition-colors">
+          {post.content}
+        </p>
+      )}
 
-      {post.image && <img src={post.image} alt="post" className="max-h-[480px] w-full object-cover" />}
+      {post.image && (
+        <img onClick={() => navigate(`/posts/${post.id}`)} src={post.image} alt="post" className="max-h-[480px] w-full cursor-pointer object-cover" />
+      )}
 
       {/* Stats */}
       <div className="flex items-center justify-between px-5 py-3 text-sm text-muted-foreground">
@@ -91,12 +101,14 @@ export const PostCard = ({ post, index = 0 }) => {
         </button>
         <button
           data-testid={`post-${post.id}-comment-button`}
+          onClick={() => navigate(`/posts/${post.id}`)}
           className="flex flex-1 items-center justify-center gap-2 rounded-xl py-2.5 text-sm font-semibold text-muted-foreground transition-all duration-200 hover:bg-accent"
         >
           <MessageCircle className="h-5 w-5" /> Comment
         </button>
         <button
           data-testid={`post-${post.id}-share-button`}
+          onClick={() => toast.info("Post shared!")}
           className="flex flex-1 items-center justify-center gap-2 rounded-xl py-2.5 text-sm font-semibold text-muted-foreground transition-all duration-200 hover:bg-accent"
         >
           <Share2 className="h-5 w-5" /> Share

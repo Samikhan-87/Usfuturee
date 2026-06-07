@@ -37,7 +37,10 @@ export default function Login() {
   };
 
   const handleDemoClick = (role) => {
-    console.log("Demo account selected:", role);
+    const acc = DEMO_ACCOUNTS.find((d) => d.role === role);
+    if (acc) {
+      finishLogin(acc, `Logged in as ${acc.name} (${ROLES[acc.role].label})`);
+    }
   };
 
   return (

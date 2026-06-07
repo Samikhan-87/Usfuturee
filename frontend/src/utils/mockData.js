@@ -217,15 +217,15 @@ export const EVENT_REGIONS = ["Online", "West", "East", "North", "South"];
 export const EVENT_INSTITUTIONS = ["Stanford University", "Lincoln Academy", "Riverside High School", "MIT"];
 
 export const EVENTS_UPCOMING = [
-  { id: "ue1", title: "AI in Education Summit 2026", category: "Academic", date: "Jun 12, 2026", time: "10:00 AM", location: "Virtual • Live", organizer: "EdTech Alliance", institution: "Stanford University", region: "Online", cover: IMG_STUDENT },
-  { id: "ue2", title: "Inter-School Football Championship", category: "Sports", date: "Jun 18, 2026", time: "2:00 PM", location: "Lincoln Stadium, CA", organizer: "Athletics Department", institution: "Lincoln Academy", region: "West", cover: IMG_SPORT },
-  { id: "ue3", title: "Spring Cultural Festival", category: "Cultural", date: "Jun 22, 2026", time: "5:30 PM", location: "Riverside Auditorium", organizer: "Arts & Culture Society", institution: "Riverside High School", region: "East", cover: IMG_DESIGN },
-  { id: "ue4", title: "Annual Science Fair", category: "Academic", date: "Jun 28, 2026", time: "9:00 AM", location: "Main Campus Hall", organizer: "Science Department", institution: "Stanford University", region: "West", cover: IMG_RESEARCH },
+  { id: "ue1", title: "AI in Education Summit 2026", category: "Academic", date: "Jun 12, 2026", time: "10:00 AM", location: "Virtual • Live", organizer: "EdTech Alliance", institution: "Stanford University", region: "Online", cover: IMG_STUDENT, description: "Join us for a full-day virtual summit exploring the role of artificial intelligence in shaping the future of education. Featuring keynotes, panels, and workshops." },
+  { id: "ue2", title: "Inter-School Football Championship", category: "Sports", date: "Jun 18, 2026", time: "2:00 PM", location: "Lincoln Stadium, CA", organizer: "Athletics Department", institution: "Lincoln Academy", region: "West", cover: IMG_SPORT, description: "Annual inter-school football championship featuring the best teams from across the district. Come support your school!" },
+  { id: "ue3", title: "Spring Cultural Festival", category: "Cultural", date: "Jun 22, 2026", time: "5:30 PM", location: "Riverside Auditorium", organizer: "Arts & Culture Society", institution: "Riverside High School", region: "East", cover: IMG_DESIGN, description: "An evening of music, dance, art, and cultural performances celebrating the diversity of our student community." },
+  { id: "ue4", title: "Annual Science Fair", category: "Academic", date: "Jun 28, 2026", time: "9:00 AM", location: "Main Campus Hall", organizer: "Science Department", institution: "Stanford University", region: "West", cover: IMG_RESEARCH, description: "Students present their research projects across all scientific disciplines. Open to all students, teachers, and parents." },
 ];
 
 export const EVENTS_PAST = [
-  { id: "pe1", title: "Robotics Workshop", category: "Academic", date: "May 14, 2026", time: "11:00 AM", location: "Tech Lab 2", organizer: "Engineering Department", institution: "MIT", region: "East", cover: BANNER },
-  { id: "pe2", title: "Annual Debate Tournament", category: "Cultural", date: "Apr 30, 2026", time: "1:00 PM", location: "Lincoln Auditorium", organizer: "Literary Society", institution: "Lincoln Academy", region: "West", cover: IMG_DESIGN },
+  { id: "pe1", title: "Robotics Workshop", category: "Academic", date: "May 14, 2026", time: "11:00 AM", location: "Tech Lab 2", organizer: "Engineering Department", institution: "MIT", region: "East", cover: BANNER, description: "Hands-on robotics workshop where students built and programmed autonomous robots from scratch." },
+  { id: "pe2", title: "Annual Debate Tournament", category: "Cultural", date: "Apr 30, 2026", time: "1:00 PM", location: "Lincoln Auditorium", organizer: "Literary Society", institution: "Lincoln Academy", region: "West", cover: IMG_DESIGN, description: "The annual debate tournament featuring 32 teams competing on current affairs and policy topics." },
 ];
 
 // ---------- EDUBOT ----------
@@ -247,16 +247,28 @@ export const STUDENT_TODAY_SCHEDULE = [
   { id: "ts3", subject: "English Literature", room: "Room 112", time: "02:00 PM" },
 ];
 export const STUDENT_ANNOUNCEMENTS = [
-  { id: "an1", teacher: "Mr. Okafor", subject: "Physics", message: "Lab report deadline extended to Friday. Submit via the portal.", time: "1h" },
-  { id: "an2", teacher: "Ms. Bennett", subject: "Mathematics", message: "Surprise quiz on integration next Monday. Review chapter 7.", time: "4h" },
-  { id: "an3", teacher: "Dr. Lee", subject: "Chemistry", message: "Great work on the midterm — class average was 84%! 🎉", time: "1d" },
+  { id: "an1", teacher: "Mr. Okafor", subject: "Physics", message: "Lab report deadline extended to Friday. Submit via the portal.", time: "1h", unread: true },
+  { id: "an2", teacher: "Ms. Bennett", subject: "Mathematics", message: "Surprise quiz on integration next Monday. Review chapter 7.", time: "4h", unread: true },
+  { id: "an3", teacher: "Dr. Lee", subject: "Chemistry", message: "Great work on the midterm — class average was 84%! 🎉", time: "1d", unread: false },
+  { id: "an4", teacher: "Principal Bennett", subject: "General", message: "School will remain closed on June 15th for National Education Day.", time: "2d", unread: false },
 ];
+
+export const STUDENT_COURSES = [
+  { id: "sc1", name: "Calculus II", teacher: "Ms. Maria Lopez", description: "Advanced integration techniques, multivariable calculus and differential equations.", color: "bg-primary/10 text-primary", lessons: 24, assignments: 6, progress: 75 },
+  { id: "sc2", name: "Physics", teacher: "Mr. David Okafor", description: "Classical mechanics, electromagnetism, optics, and modern physics.", color: "bg-emerald-500/10 text-emerald-600", lessons: 32, assignments: 8, progress: 60 },
+  { id: "sc3", name: "English Literature", teacher: "Mr. James Patel", description: "Survey of English literature from the Renaissance to modern era.", color: "bg-violet-500/10 text-violet-600", lessons: 18, assignments: 5, progress: 80 },
+  { id: "sc4", name: "Organic Chemistry", teacher: "Dr. Susan Lee", description: "Reaction mechanisms, stereochemistry, and functional group transformations.", color: "bg-amber-500/10 text-amber-600", lessons: 28, assignments: 7, progress: 45 },
+  { id: "sc5", name: "World History", teacher: "Ms. Priya Sharma", description: "Global historical events from ancient civilizations to contemporary geopolitics.", color: "bg-rose-500/10 text-rose-600", lessons: 20, assignments: 4, progress: 90 },
+  { id: "sc6", name: "Computer Science", teacher: "Mr. Carlos Mendez", description: "Data structures, algorithms, and introduction to machine learning.", color: "bg-cyan-500/10 text-cyan-600", lessons: 30, assignments: 9, progress: 55 },
+];
+
 export const STUDENT_ASSIGNMENTS = [
-  { id: "as1", subject: "Mathematics", title: "Integration Problem Set 4", due: "Jun 10, 2026", status: "Pending" },
-  { id: "as2", subject: "Physics", title: "Projectile Motion Lab Report", due: "Jun 08, 2026", status: "Submitted" },
-  { id: "as3", subject: "English", title: "Essay: Modern Poetry Analysis", due: "Jun 05, 2026", status: "Late" },
-  { id: "as4", subject: "Chemistry", title: "Organic Reactions Worksheet", due: "Jun 12, 2026", status: "Pending" },
+  { id: "as1", subject: "Mathematics", title: "Integration Problem Set 4", due: "Jun 10, 2026", status: "Pending", courseId: "sc1", description: "Complete problems 1–20 from Chapter 8. Show all integration steps. Partial credit awarded.", files: [] },
+  { id: "as2", subject: "Physics", title: "Projectile Motion Lab Report", due: "Jun 08, 2026", status: "Submitted", courseId: "sc2", description: "Write a full lab report based on the projectile motion experiment. Include hypothesis, procedure, data tables, analysis, and conclusion.", files: ["projectile_data.pdf"] },
+  { id: "as3", subject: "English", title: "Essay: Modern Poetry Analysis", due: "Jun 05, 2026", status: "Late", courseId: "sc3", description: "Write a 1500-word comparative analysis of two modern poems. Discuss themes, tone, and literary devices.", files: [] },
+  { id: "as4", subject: "Chemistry", title: "Organic Reactions Worksheet", due: "Jun 12, 2026", status: "Pending", courseId: "sc4", description: "Complete all reaction mechanism diagrams. Label nucleophiles, electrophiles, and indicate arrow-pushing steps.", files: [] },
 ];
+
 export const STUDENT_TESTS = [
   {
     id: "t1", subject: "Mathematics", date: "Jun 14, 2026", duration: "30 min", marks: 20,
@@ -299,11 +311,11 @@ export const TEACHER_MESSAGES = [
   { id: "tm3", from: "Parent — A. Smith", role: "parent", message: "Thank you for the extra help sessions!", time: "1d" },
 ];
 export const TEACHER_GRADING_STUDENTS = [
-  { id: "gs1", name: "Liam Chen", file: "liam_lab_report.pdf" },
-  { id: "gs2", name: "Emma Davis", file: "emma_lab_report.pdf" },
-  { id: "gs3", name: "Carlos Mendez", file: "carlos_lab_report.pdf" },
-  { id: "gs4", name: "Priya Sharma", file: "priya_lab_report.pdf" },
-  { id: "gs5", name: "Noah Williams", file: "noah_lab_report.pdf" },
+  { id: "gs1", name: "Liam Chen", file: "liam_lab_report.pdf", avatar: AVATARS.diego, marks: null, feedback: "" },
+  { id: "gs2", name: "Emma Davis", file: "emma_lab_report.pdf", avatar: AVATARS.aisha, marks: 18, feedback: "Excellent work on the analysis section." },
+  { id: "gs3", name: "Carlos Mendez", file: "carlos_lab_report.pdf", avatar: AVATARS.maya, marks: null, feedback: "" },
+  { id: "gs4", name: "Priya Sharma", file: "priya_lab_report.pdf", avatar: AVATARS.maya, marks: 15, feedback: "Good effort. Work on conclusion clarity." },
+  { id: "gs5", name: "Noah Williams", file: "noah_lab_report.pdf", avatar: AVATARS.diego, marks: null, feedback: "" },
 ];
 export const TEACHER_WEEK_DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri"];
 export const TEACHER_PERIODS = ["09:00", "10:30", "12:00", "02:00"];
@@ -317,30 +329,144 @@ export const TEACHER_SCHEDULE = {
   "Fri-10:30": { subject: "Physics G12", room: "R204" },
 };
 
+export const TEACHER_COURSES = [
+  {
+    id: "tc_c1",
+    name: "Physics — Grade 11",
+    description: "Classical mechanics, waves, thermodynamics and electromagnetism for Grade 11.",
+    students: 32,
+    materials: [
+      { id: "m1", title: "Chapter 1 — Kinematics", desc: "Notes and worked examples", date: "Jun 01" },
+      { id: "m2", title: "Chapter 2 — Dynamics", desc: "Newton's Laws detailed notes", date: "Jun 05" },
+    ],
+    assignments: ["ta1", "ta2"],
+  },
+  {
+    id: "tc_c2",
+    name: "Physics — Grade 12",
+    description: "Advanced topics: electromagnetism, quantum mechanics, and nuclear physics.",
+    students: 28,
+    materials: [
+      { id: "m3", title: "Electromagnetism Notes", desc: "Maxwell's equations overview", date: "Jun 03" },
+    ],
+    assignments: ["ta3"],
+  },
+  {
+    id: "tc_c3",
+    name: "Science Club",
+    description: "Extracurricular science exploration and project-based learning.",
+    students: 18,
+    materials: [],
+    assignments: [],
+  },
+];
+
+export const TEACHER_ASSIGNMENTS = [
+  {
+    id: "ta_a1",
+    title: "Projectile Motion Lab Report",
+    subject: "Physics",
+    courseId: "tc_c1",
+    dueDate: "Jun 08, 2026",
+    totalMarks: 20,
+    description: "Write a full lab report based on the projectile motion experiment. Include hypothesis, procedure, data tables, analysis, and conclusion.",
+    submissions: [
+      { studentId: "gs1", studentName: "Liam Chen", avatar: AVATARS.diego, submittedAt: "Jun 07, 9:45 AM", file: "liam_lab.pdf", marks: null, feedback: "" },
+      { studentId: "gs2", studentName: "Emma Davis", avatar: AVATARS.aisha, submittedAt: "Jun 07, 10:20 AM", file: "emma_lab.pdf", marks: 18, feedback: "Excellent work!" },
+      { studentId: "gs3", studentName: "Carlos Mendez", avatar: AVATARS.maya, submittedAt: "Jun 08, 8:00 AM", file: "carlos_lab.pdf", marks: null, feedback: "" },
+    ],
+  },
+  {
+    id: "ta_a2",
+    title: "Newton's Laws Worksheet",
+    subject: "Physics",
+    courseId: "tc_c1",
+    dueDate: "Jun 12, 2026",
+    totalMarks: 15,
+    description: "Complete all 10 problems demonstrating understanding of Newton's three laws of motion. Show all working.",
+    submissions: [
+      { studentId: "gs4", studentName: "Priya Sharma", avatar: AVATARS.maya, submittedAt: "Jun 11, 6:30 PM", file: "priya_ws.pdf", marks: 13, feedback: "Good work overall." },
+    ],
+  },
+];
+
+export const TEACHER_TESTS = [
+  {
+    id: "tt1",
+    title: "Physics Mid-Term Test",
+    subject: "Physics",
+    courseId: "tc_c1",
+    duration: 45,
+    totalMarks: 30,
+    scheduledDate: "Jun 14, 2026",
+    questions: [
+      { q: "Unit of force?", options: ["Newton", "Joule", "Watt", "Pascal"], answer: 0 },
+      { q: "Speed of light (approx)?", options: ["3×10⁸ m/s", "3×10⁶ m/s", "3×10⁵ m/s", "3×10¹⁰ m/s"], answer: 0 },
+      { q: "Acceleration due to gravity?", options: ["9.8 m/s²", "8.9 m/s²", "10.8 m/s²", "9.0 m/s²"], answer: 0 },
+    ],
+    results: [
+      { studentName: "Liam Chen", score: 28, total: 30, percentage: 93, timeTaken: "38 min" },
+      { studentName: "Emma Davis", score: 26, total: 30, percentage: 87, timeTaken: "42 min" },
+      { studentName: "Carlos Mendez", score: 22, total: 30, percentage: 73, timeTaken: "44 min" },
+      { studentName: "Priya Sharma", score: 24, total: 30, percentage: 80, timeTaken: "40 min" },
+    ],
+    published: true,
+  },
+];
+
+export const TEACHER_STUDENTS = [
+  { id: "ts_s1", name: "Liam Chen", email: "liam@school.edu", avatar: AVATARS.diego, course: "Physics G11", grade: "A", attendance: "95%" },
+  { id: "ts_s2", name: "Emma Davis", email: "emma@school.edu", avatar: AVATARS.aisha, course: "Physics G11", grade: "A+", attendance: "98%" },
+  { id: "ts_s3", name: "Carlos Mendez", email: "carlos@school.edu", avatar: AVATARS.maya, course: "Physics G11", grade: "B+", attendance: "88%" },
+  { id: "ts_s4", name: "Priya Sharma", email: "priya@school.edu", avatar: AVATARS.maya, course: "Physics G12", grade: "B", attendance: "91%" },
+  { id: "ts_s5", name: "Noah Williams", email: "noah@school.edu", avatar: AVATARS.diego, course: "Physics G12", grade: "A-", attendance: "93%" },
+];
+
 // ===================== PRINCIPAL PORTAL =====================
 export const PRINCIPAL_STUDENTS = [
-  { id: "ps1", name: "Liam Chen", grade: "Grade 11", feeStatus: "Paid" },
-  { id: "ps2", name: "Emma Davis", grade: "Grade 10", feeStatus: "Pending" },
-  { id: "ps3", name: "Carlos Mendez", grade: "Grade 12", feeStatus: "Paid" },
-  { id: "ps4", name: "Priya Sharma", grade: "Grade 11", feeStatus: "Overdue" },
-  { id: "ps5", name: "Noah Williams", grade: "Grade 9", feeStatus: "Pending" },
+  { id: "ps1", name: "Liam Chen", grade: "Grade 11", email: "liam@school.edu", feeStatus: "Paid", joinDate: "Sep 2024", parentName: "Mr. & Mrs. Chen", parentContact: "+1 555-0101", avatar: AVATARS.diego },
+  { id: "ps2", name: "Emma Davis", grade: "Grade 10", email: "emma@school.edu", feeStatus: "Pending", joinDate: "Sep 2025", parentName: "Mr. & Mrs. Davis", parentContact: "+1 555-0102", avatar: AVATARS.aisha },
+  { id: "ps3", name: "Carlos Mendez", grade: "Grade 12", email: "carlos@school.edu", feeStatus: "Paid", joinDate: "Sep 2023", parentName: "Mr. Mendez", parentContact: "+1 555-0103", avatar: AVATARS.maya },
+  { id: "ps4", name: "Priya Sharma", grade: "Grade 11", email: "priya@school.edu", feeStatus: "Overdue", joinDate: "Sep 2024", parentName: "Mrs. Sharma", parentContact: "+1 555-0104", avatar: AVATARS.maya },
+  { id: "ps5", name: "Noah Williams", grade: "Grade 9", email: "noah@school.edu", feeStatus: "Pending", joinDate: "Sep 2025", parentName: "Mr. Williams", parentContact: "+1 555-0105", avatar: AVATARS.diego },
+  { id: "ps6", name: "Sofia Nguyen", grade: "Grade 10", email: "sofia@school.edu", feeStatus: "Paid", joinDate: "Sep 2025", parentName: "Mr. & Mrs. Nguyen", parentContact: "+1 555-0106", avatar: AVATARS.aisha },
 ];
+
 export const PRINCIPAL_TEACHERS = [
-  { id: "pt1", name: "David Okafor", subject: "Physics" },
-  { id: "pt2", name: "Maria Lopez", subject: "Mathematics" },
-  { id: "pt3", name: "Dr. Susan Lee", subject: "Chemistry" },
-  { id: "pt4", name: "James Patel", subject: "English Literature" },
+  { id: "pt1", name: "David Okafor", subject: "Physics", email: "okafor@school.edu", qualification: "M.Sc. Physics", joinDate: "Aug 2020", avatar: AVATARS.diego, courses: ["Physics G11", "Physics G12"], students: 60 },
+  { id: "pt2", name: "Maria Lopez", subject: "Mathematics", email: "lopez@school.edu", qualification: "M.Sc. Mathematics", joinDate: "Aug 2019", avatar: AVATARS.maya, courses: ["Calculus II", "Algebra G10"], students: 75 },
+  { id: "pt3", name: "Dr. Susan Lee", subject: "Chemistry", email: "lee@school.edu", qualification: "Ph.D. Chemistry", joinDate: "Jan 2021", avatar: AVATARS.aisha, courses: ["Organic Chemistry", "Chemistry G9"], students: 55 },
+  { id: "pt4", name: "James Patel", subject: "English Literature", email: "patel@school.edu", qualification: "M.A. English", joinDate: "Aug 2022", avatar: AVATARS.diego, courses: ["English Literature G11", "Creative Writing"], students: 48 },
 ];
+
 export const PRINCIPAL_ADMISSIONS = [
-  { id: "ad1", name: "Sophie Turner", classApplied: "Grade 9", date: "Jun 02, 2026", status: "Pending" },
-  { id: "ad2", name: "Marcus Johnson", classApplied: "Grade 11", date: "Jun 03, 2026", status: "Pending" },
-  { id: "ad3", name: "Aisha Rahman", classApplied: "Grade 10", date: "Jun 04, 2026", status: "Pending" },
+  { id: "ad1", name: "Sophie Turner", classApplied: "Grade 9", date: "Jun 02, 2026", status: "Pending", parentName: "Mr. Turner", parentContact: "+1 555-0201", email: "sophie@email.com", reason: "Seeking a better academic environment" },
+  { id: "ad2", name: "Marcus Johnson", classApplied: "Grade 11", date: "Jun 03, 2026", status: "Pending", parentName: "Mrs. Johnson", parentContact: "+1 555-0202", email: "marcus@email.com", reason: "Transferring from out-of-state" },
+  { id: "ad3", name: "Aisha Rahman", classApplied: "Grade 10", date: "Jun 04, 2026", status: "Pending", parentName: "Mr. Rahman", parentContact: "+1 555-0203", email: "aisha@email.com", reason: "New to the district" },
+  { id: "ad4", name: "Tommy Park", classApplied: "Grade 9", date: "May 28, 2026", status: "Approved", parentName: "Mr. Park", parentContact: "+1 555-0204", email: "tommy@email.com", reason: "Recommended by family" },
+  { id: "ad5", name: "Lucy Evans", classApplied: "Grade 12", date: "May 20, 2026", status: "Rejected", parentName: "Ms. Evans", parentContact: "+1 555-0205", email: "lucy@email.com", reason: "Transfer student", rejectReason: "Grade 12 class at full capacity for this semester." },
 ];
+
 export const PRINCIPAL_FEE_CLASSES = [
-  { id: "fc1", grade: "Grade 9", amount: 1000 },
-  { id: "fc2", grade: "Grade 10", amount: 1100 },
-  { id: "fc3", grade: "Grade 11", amount: 1200 },
-  { id: "fc4", grade: "Grade 12", amount: 1300 },
+  { id: "fc1", grade: "Grade 9", tuition: 1000, exam: 150, other: 80, fine: 10 },
+  { id: "fc2", grade: "Grade 10", tuition: 1100, exam: 150, other: 80, fine: 10 },
+  { id: "fc3", grade: "Grade 11", tuition: 1200, exam: 175, other: 100, fine: 15 },
+  { id: "fc4", grade: "Grade 12", tuition: 1300, exam: 200, other: 120, fine: 15 },
+];
+
+export const PRINCIPAL_FEE_RECEIPTS = [
+  { id: "fr1", studentId: "ps1", studentName: "Liam Chen", grade: "Grade 11", amount: 1475, dueDate: "Jun 20, 2026", status: "Paid", receiptUrl: null },
+  { id: "fr2", studentId: "ps2", studentName: "Emma Davis", grade: "Grade 10", amount: 1330, dueDate: "Jun 20, 2026", status: "Under Review", receiptUrl: "receipt_emma.pdf" },
+  { id: "fr3", studentId: "ps3", studentName: "Carlos Mendez", grade: "Grade 12", amount: 1620, dueDate: "Jun 20, 2026", status: "Paid", receiptUrl: null },
+  { id: "fr4", studentId: "ps4", studentName: "Priya Sharma", grade: "Grade 11", amount: 1625, dueDate: "Jun 01, 2026", status: "Overdue", receiptUrl: null },
+  { id: "fr5", studentId: "ps5", studentName: "Noah Williams", grade: "Grade 9", amount: 1230, dueDate: "Jun 20, 2026", status: "Pending", receiptUrl: null },
+  { id: "fr6", studentId: "ps6", studentName: "Sofia Nguyen", grade: "Grade 10", amount: 1330, dueDate: "Jun 20, 2026", status: "Paid", receiptUrl: null },
+];
+
+export const PRINCIPAL_ANNOUNCEMENTS_SENT = [
+  { id: "pa1", title: "School Closure Notice", message: "School will remain closed on June 15th for National Education Day.", target: "All", date: "Jun 05, 2026" },
+  { id: "pa2", title: "Fee Deadline Reminder", message: "Please ensure all fees are paid by June 20th to avoid late fine charges.", target: "All Students", date: "Jun 03, 2026" },
+  { id: "pa3", title: "Staff Meeting", message: "Mandatory staff meeting on Thursday June 12th at 4 PM in the conference room.", target: "All Teachers", date: "Jun 01, 2026" },
 ];
 
 // ===================== INSTITUTION PROFILE =====================
@@ -354,14 +480,18 @@ export const INSTITUTION = {
   message: "Welcome to Lincoln Academy! We nurture curious minds and future leaders. Our doors are open for the 2026–27 admissions. Join a community that values knowledge, character, and creativity.",
   classes: ["Grade 9", "Grade 10", "Grade 11", "Grade 12"],
   admissionFee: 250,
+  location: "123 Academy Drive, Lincoln, CA 94560",
+  email: "contact@lincolnacademy.edu",
+  phone: "+1 (555) 200-1000",
+  website: "www.lincolnacademy.edu",
   books: [
-    { id: "bk1", title: "Advanced Calculus", img: IMG_RESEARCH },
-    { id: "bk2", title: "Modern Physics", img: IMG_STUDENT },
-    { id: "bk3", title: "World Literature", img: IMG_DESIGN },
-    { id: "bk4", title: "Organic Chemistry", img: IMG_SPORT },
+    { id: "bk1", title: "Advanced Calculus", img: IMG_RESEARCH, subject: "Mathematics", price: 45 },
+    { id: "bk2", title: "Modern Physics", img: IMG_STUDENT, subject: "Physics", price: 52 },
+    { id: "bk3", title: "World Literature", img: IMG_DESIGN, subject: "English", price: 38 },
+    { id: "bk4", title: "Organic Chemistry", img: IMG_SPORT, subject: "Chemistry", price: 60 },
   ],
   uniforms: [
-    { id: "uf1", label: "Formal Uniform", img: IMG_DESIGN },
-    { id: "uf2", label: "Sports Kit", img: IMG_SPORT },
+    { id: "uf1", label: "Formal Uniform", img: IMG_DESIGN, desc: "Available at Lincoln Academy Store, Main Building. Price: $35." },
+    { id: "uf2", label: "Sports Kit", img: IMG_SPORT, desc: "Available at Lincoln Academy Store, Main Building. Price: $28." },
   ],
 };

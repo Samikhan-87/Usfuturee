@@ -1,28 +1,38 @@
-import { GraduationCap } from "lucide-react";
+import { useThemeStore } from "@/store/themeStore";
+import logoLight from "@/assets/logos/Lightmode.png";
+import logoDark  from "@/assets/logos/Darkmode.png";
 
 export const Logo = ({ size = "default" }) => {
-  const dims = size === "lg" ? "h-12 w-12" : "h-9 w-9";
-  const text = size === "lg" ? "text-3xl" : "text-2xl";
-  const icon = size === "lg" ? "text-xl" : "text-base";
+  const theme = useThemeStore((s) => s.theme);
+  const imgSrc = theme === "dark" ? logoDark : logoLight;
+
+  const imgDims  = size === "lg" ? "h-14 w-14" : "h-10 w-10";
+  const textSize = size === "lg" ? "text-3xl"  : "text-2xl";
+
   return (
     <div className="flex items-center gap-2.5" data-testid="app-logo">
-      <div
-        className={`grid ${dims} place-items-center rounded-full bg-primary font-heading ${icon} font-black text-primary-foreground shadow-lg shadow-primary/30`}
-      >
-        U
-      </div>
-      <span className={`font-heading ${text} font-extrabold tracking-tight text-foreground`}>
+      <img
+        src={imgSrc}
+        alt="Usfuturee logo"
+        className={`${imgDims} shrink-0 rounded-xl object-contain`}
+      />
+      <span className={`font-heading ${textSize} font-extrabold tracking-tight text-foreground`}>
         Usfuturee
       </span>
     </div>
   );
 };
 
-export const BrandMark = () => (
-  <div className="grid h-9 w-9 place-items-center rounded-full bg-primary font-heading text-base font-black text-primary-foreground shadow-lg shadow-primary/30">
-    U
-  </div>
-);
+/** Standalone icon-only mark — tight spaces like mobile drawers */
+export const BrandMark = () => {
+  const theme = useThemeStore((s) => s.theme);
+  const imgSrc = theme === "dark" ? logoDark : logoLight;
 
-// keep graduation cap available for other uses
-export const LogoIcon = GraduationCap;
+  return (
+    <img
+      src={imgSrc}
+      alt="Usfuturee"
+      className="h-9 w-9 shrink-0 rounded-xl object-contain"
+    />
+  );
+};

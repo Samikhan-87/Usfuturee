@@ -1,15 +1,16 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { MainLayout } from "@/layouts/MainLayout";
 import { StatCard, portalToast } from "@/components/PortalStat";
 import { TestRunner } from "@/components/TestRunner";
 import {
   STUDENT_TODAY_SCHEDULE, STUDENT_ANNOUNCEMENTS, STUDENT_ASSIGNMENTS,
-  STUDENT_TESTS, STUDENT_FEES,
+  STUDENT_TESTS, STUDENT_FEES, STUDENT_COURSES,
 } from "@/utils/mockData";
 import {
   BookOpen, ClipboardList, FileCheck2, Wallet, Clock, MapPin, Megaphone,
   Calendar, Bell, CreditCard, Upload, ShieldAlert, QrCode, Landmark,
-  Download, Printer, X, Play, Link2,
+  Download, Printer, X, Play, Link2, ChevronRight, TrendingUp,
 } from "lucide-react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
@@ -24,6 +25,7 @@ const statusStyle = {
 };
 
 export default function StudentPortal() {
+  const navigate = useNavigate();
   const [assignments, setAssignments] = useState(STUDENT_ASSIGNMENTS);
   const [uploadFor, setUploadFor] = useState(null);
   const [warnTest, setWarnTest] = useState(null);
@@ -47,22 +49,23 @@ export default function StudentPortal() {
 
         {/* Stats */}
         <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
-          <StatCard icon={BookOpen} label="Enrolled Courses" value="6" />
-          <StatCard icon={ClipboardList} label="Pending Assignments" value="2" accent="bg-amber-500/10 text-amber-500" />
-          <StatCard icon={FileCheck2} label="Upcoming Tests" value="2" accent="bg-violet-500/10 text-violet-500" />
+          <StatCard icon={BookOpen} label="Enrolled Courses" value={STUDENT_COURSES.length} />
+          <StatCard icon={ClipboardList} label="Pending Assignments" value={assignments.filter(a => a.status === "Pending").length} accent="bg-amber-500/10 text-amber-500" />
+          <StatCard icon={FileCheck2} label="Upcoming Tests" value={STUDENT_TESTS.length} accent="bg-violet-500/10 text-violet-500" />
           <StatCard icon={Wallet} label="Fee Status" value={feeStatus} accent="bg-destructive/10 text-destructive" />
         </div>
 
         <Tabs defaultValue="dashboard" className="w-full">
           <TabsList className="flex w-full flex-wrap justify-start gap-1 rounded-2xl bg-card p-1" data-testid="student-tabs">
-            {["dashboard", "assignments", "tests", "fees"].map((t) => (
-              <TabsTrigger key={t} value={t} data-testid={`student-tab-${t}`} className="flex-1 rounded-xl capitalize data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+            {["dashboard", "courses", "assignments", "tests", "fees", "announcements"].map((t) => (
+              <TabsTrigger key={t} value={t} data-testid={`student-tab-${t}`}
+                className="flex-1 rounded-xl capitalize data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
                 {t === "fees" ? "Fee & Payments" : t}
               </TabsTrigger>
             ))}
           </TabsList>
 
-          {/* Dashboard */}
+          {/* ── DASHBOARD ── */}
           <TabsContent value="dashboard" className="mt-6 grid gap-6 lg:grid-cols-2" data-testid="student-dashboard">
             <Panel title="Today's Schedule" icon={Calendar}>
               {STUDENT_TODAY_SCHEDULE.map((s) => (
@@ -77,8 +80,8 @@ export default function StudentPortal() {
             </Panel>
 
             <Panel title="Recent Announcements" icon={Megaphone}>
-              {STUDENT_ANNOUNCEMENTS.map((a) => (
-                <div key={a.id} className="rounded-xl bg-secondary/60 p-3">
+              {STUDENT_ANNOUNCEMENTS.slice(0, 3).map((a) => (
+                <div key={a.id} className={`rounded-xl p-3 ${a.unread ? "bg-primary/5 ring-1 ring-primary/20" : "bg-secondary/60"}`}>
                   <p className="text-sm font-semibold text-foreground">{a.teacher} <span className="font-normal text-muted-foreground">· {a.subject} · {a.time}</span></p>
                   <p className="mt-1 text-sm text-foreground/80">{a.message}</p>
                 </div>
@@ -93,7 +96,9 @@ export default function StudentPortal() {
                   { label: "Library", icon: BookOpen },
                   { label: "Notifications", icon: Bell },
                 ].map((q) => (
-                  <button key={q.label} data-testid={`quick-${q.label.toLowerCase().replace(/ /g, "-")}`} onClick={() => portalToast(toast, `${q.label} opened`)} className="flex flex-col items-center gap-2 rounded-2xl border border-border p-4 text-center transition-all hover:-translate-y-0.5 hover:border-primary">
+                  <button key={q.label} data-testid={`quick-${q.label.toLowerCase().replace(/ /g, "-")}`}
+                    onClick={() => portalToast(toast, `${q.label} opened`)}
+                    className="flex flex-col items-center gap-2 rounded-2xl border border-border p-4 text-center transition-all hover:-translate-y-0.5 hover:border-primary">
                     <q.icon className="h-6 w-6 text-primary" />
                     <span className="text-sm font-medium text-foreground">{q.label}</span>
                   </button>
@@ -102,22 +107,56 @@ export default function StudentPortal() {
             </Panel>
           </TabsContent>
 
-          {/* Assignments */}
+          {/* ── MY COURSES ── */}
+          <TabsContent value="courses" className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" data-testid="student-courses">
+            {STUDENT_COURSES.map((c) => (
+              <div key={c.id} data-testid={`student-course-${c.id}`}
+                onClick={() => navigate(`/portal/courses/${c.id}`)}
+                className="group cursor-pointer overflow-hidden rounded-2xl border border-border bg-card p-5 transition-all duration-200 hover:-translate-y-1 hover:border-primary">
+                <div className={`grid h-12 w-12 place-items-center rounded-2xl ${c.color}`}>
+                  <BookOpen className="h-6 w-6" />
+                </div>
+                <h3 className="mt-3 font-heading text-base font-bold text-foreground">{c.name}</h3>
+                <p className="mt-0.5 text-xs text-muted-foreground">{c.teacher}</p>
+                <p className="mt-2 text-sm text-muted-foreground line-clamp-2">{c.description}</p>
+                <div className="mt-4">
+                  <div className="mb-1 flex justify-between text-xs text-muted-foreground">
+                    <span>Progress</span>
+                    <span className="font-semibold text-foreground">{c.progress}%</span>
+                  </div>
+                  <div className="h-1.5 w-full overflow-hidden rounded-full bg-secondary">
+                    <div className="h-full rounded-full bg-primary transition-all" style={{ width: `${c.progress}%` }} />
+                  </div>
+                </div>
+                <div className="mt-3 flex items-center gap-4 text-xs text-muted-foreground">
+                  <span>{c.lessons} lessons</span>
+                  <span>{c.assignments} assignments</span>
+                </div>
+                <div className="mt-3 flex items-center gap-1.5 text-xs font-semibold text-primary group-hover:underline">
+                  Open Course <ChevronRight className="h-3.5 w-3.5" />
+                </div>
+              </div>
+            ))}
+          </TabsContent>
+
+          {/* ── ASSIGNMENTS ── */}
           <TabsContent value="assignments" className="mt-6 flex flex-col gap-3" data-testid="student-assignments">
             {assignments.map((a) => (
-              <div key={a.id} data-testid={`assignment-${a.id}`} className="flex flex-col gap-3 rounded-2xl border border-border bg-card p-4 sm:flex-row sm:items-center sm:justify-between">
+              <div key={a.id} data-testid={`assignment-${a.id}`}
+                onClick={() => navigate(`/portal/assignments/${a.id}`)}
+                className="flex cursor-pointer flex-col gap-3 rounded-2xl border border-border bg-card p-4 transition-all hover:-translate-y-0.5 hover:border-primary sm:flex-row sm:items-center sm:justify-between">
                 <div>
                   <p className="text-xs font-bold uppercase tracking-widest text-primary">{a.subject}</p>
                   <p className="font-semibold text-foreground">{a.title}</p>
                   <p className="text-xs text-muted-foreground">Due {a.due}</p>
                 </div>
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-3" onClick={(e) => e.stopPropagation()}>
                   <span className={`rounded-full px-3 py-1 text-xs font-bold ${statusStyle[a.status]}`}>{a.status}</span>
                   <button
                     data-testid={`submit-assignment-${a.id}`}
-                    onClick={() => setUploadFor(a)}
+                    onClick={(e) => { e.stopPropagation(); setUploadFor(a); }}
                     disabled={a.status === "Submitted"}
-                    className="flex items-center gap-1.5 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition-all hover:bg-primary-hover disabled:opacity-40"
+                    className="flex items-center gap-1.5 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition-all hover:bg-primary/90 disabled:opacity-40"
                   >
                     <Upload className="h-4 w-4" /> Submit
                   </button>
@@ -126,18 +165,21 @@ export default function StudentPortal() {
             ))}
           </TabsContent>
 
-          {/* Tests */}
+          {/* ── TESTS ── */}
           <TabsContent value="tests" className="mt-6 flex flex-col gap-3" data-testid="student-tests">
             {STUDENT_TESTS.map((t) => (
-              <div key={t.id} data-testid={`test-${t.id}`} className="flex flex-col gap-3 rounded-2xl border border-border bg-card p-5 sm:flex-row sm:items-center sm:justify-between">
+              <div key={t.id} data-testid={`test-${t.id}`}
+                onClick={() => navigate(`/portal/tests/${t.id}`)}
+                className="flex cursor-pointer flex-col gap-3 rounded-2xl border border-border bg-card p-5 transition-all hover:-translate-y-0.5 hover:border-primary sm:flex-row sm:items-center sm:justify-between">
                 <div>
                   <p className="font-heading text-lg font-bold text-foreground">{t.subject}</p>
                   <p className="mt-1 text-sm text-muted-foreground">{t.date} · {t.duration} · {t.marks} marks</p>
+                  <p className="mt-0.5 text-xs text-muted-foreground">{t.questions.length} questions</p>
                 </div>
                 <button
                   data-testid={`start-test-${t.id}`}
-                  onClick={() => setWarnTest(t)}
-                  className="flex items-center justify-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-all hover:bg-primary-hover"
+                  onClick={(e) => { e.stopPropagation(); setWarnTest(t); }}
+                  className="flex items-center justify-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-all hover:bg-primary/90"
                 >
                   <Play className="h-4 w-4" /> Start Test
                 </button>
@@ -145,9 +187,15 @@ export default function StudentPortal() {
             ))}
           </TabsContent>
 
-          {/* Fee & Payments */}
+          {/* ── FEE & PAYMENTS ── */}
           <TabsContent value="fees" className="mt-6 grid gap-6 lg:grid-cols-[1fr_320px]" data-testid="student-fees">
             <div className="flex flex-col gap-6">
+              {feeStatus === "Overdue" && (
+                <div className="flex items-center gap-3 rounded-2xl bg-destructive/10 p-4 text-destructive">
+                  <ShieldAlert className="h-5 w-5 shrink-0" />
+                  <p className="text-sm font-semibold">Fee overdue — fine of $15/day is being added to your balance.</p>
+                </div>
+              )}
               <Panel title="Pending Fees" icon={CreditCard}>
                 {STUDENT_FEES.map((f) => (
                   <div key={f.id} className="flex items-center justify-between rounded-xl bg-secondary/60 p-3">
@@ -166,7 +214,8 @@ export default function StudentPortal() {
                     <img src={`https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=Usfuturee-Fee-${totalDue}`} alt="QR" className="h-28 w-28 rounded-lg bg-white p-1" data-testid="fee-qr-code" />
                     <span className="flex items-center gap-1 text-xs font-semibold text-foreground"><QrCode className="h-3.5 w-3.5" /> Scan to Pay</span>
                   </div>
-                  <button data-testid="bank-transfer" onClick={() => portalToast(toast, "Bank transfer details copied")} className="flex flex-col items-center justify-center gap-2 rounded-2xl border border-border p-4 transition-all hover:border-primary">
+                  <button data-testid="bank-transfer" onClick={() => portalToast(toast, "Bank transfer details copied")}
+                    className="flex flex-col items-center justify-center gap-2 rounded-2xl border border-border p-4 transition-all hover:border-primary">
                     <Landmark className="h-7 w-7 text-primary" />
                     <span className="text-sm font-semibold text-foreground">Bank Transfer</span>
                   </button>
@@ -177,10 +226,12 @@ export default function StudentPortal() {
                   </label>
                 </div>
                 <div className="mt-4 flex flex-wrap gap-3">
-                  <button data-testid="download-statement" onClick={() => portalToast(toast, "Fee statement downloaded")} className="flex items-center gap-2 rounded-full border border-border px-4 py-2 text-sm font-semibold text-foreground transition-all hover:bg-accent">
+                  <button data-testid="download-statement" onClick={() => portalToast(toast, "Fee statement downloaded")}
+                    className="flex items-center gap-2 rounded-full border border-border px-4 py-2 text-sm font-semibold text-foreground transition-all hover:bg-accent">
                     <Download className="h-4 w-4" /> Download Statement
                   </button>
-                  <button data-testid="print-voucher" onClick={() => portalToast(toast, "Voucher sent to printer")} className="flex items-center gap-2 rounded-full border border-border px-4 py-2 text-sm font-semibold text-foreground transition-all hover:bg-accent">
+                  <button data-testid="print-voucher" onClick={() => portalToast(toast, "Voucher sent to printer")}
+                    className="flex items-center gap-2 rounded-full border border-border px-4 py-2 text-sm font-semibold text-foreground transition-all hover:bg-accent">
                     <Printer className="h-4 w-4" /> Print Voucher
                   </button>
                 </div>
@@ -197,6 +248,22 @@ export default function StudentPortal() {
               </div>
             </div>
           </TabsContent>
+
+          {/* ── ANNOUNCEMENTS ── */}
+          <TabsContent value="announcements" className="mt-6 flex flex-col gap-3" data-testid="student-announcement-tab">
+            {STUDENT_ANNOUNCEMENTS.map((a) => (
+              <div key={a.id} className={`rounded-2xl border p-4 ${a.unread ? "border-primary/30 bg-primary/5" : "border-border bg-card"}`}>
+                <div className="flex items-start justify-between gap-2">
+                  <div>
+                    <p className="font-semibold text-foreground">{a.teacher}</p>
+                    <p className="text-xs text-muted-foreground">{a.subject} · {a.time} ago</p>
+                  </div>
+                  {a.unread && <span className="shrink-0 rounded-full bg-primary px-2 py-0.5 text-[10px] font-bold text-primary-foreground">NEW</span>}
+                </div>
+                <p className="mt-2 text-sm text-foreground">{a.message}</p>
+              </div>
+            ))}
+          </TabsContent>
         </Tabs>
       </div>
 
@@ -212,7 +279,10 @@ export default function StudentPortal() {
             <span className="text-sm font-medium">Click to upload your file</span>
             <input type="file" hidden data-testid="assignment-file-input" />
           </label>
-          <button data-testid="confirm-submit-assignment" onClick={submitAssignment} className="h-11 rounded-full bg-primary font-semibold text-primary-foreground transition-all hover:bg-primary-hover">Submit Assignment</button>
+          <button data-testid="confirm-submit-assignment" onClick={submitAssignment}
+            className="h-11 rounded-full bg-primary font-semibold text-primary-foreground transition-all hover:bg-primary/90">
+            Submit Assignment
+          </button>
         </DialogContent>
       </Dialog>
 
@@ -229,12 +299,12 @@ export default function StudentPortal() {
             This test will lock your browser. Tab switching will end the test automatically. Right-click is disabled during the test.
           </p>
           <div className="flex gap-3">
-            <button onClick={() => setWarnTest(null)} className="flex-1 rounded-full border border-border py-2.5 text-sm font-semibold text-foreground transition-all hover:bg-accent">Cancel</button>
+            <button onClick={() => setWarnTest(null)}
+              className="flex-1 rounded-full border border-border py-2.5 text-sm font-semibold text-foreground transition-all hover:bg-accent">Cancel</button>
             <button
               data-testid="confirm-start-test"
               onClick={() => { setActiveTest(warnTest); setWarnTest(null); }}
-              className="flex-1 rounded-full bg-primary py-2.5 text-sm font-semibold text-primary-foreground transition-all hover:bg-primary-hover"
-            >
+              className="flex-1 rounded-full bg-primary py-2.5 text-sm font-semibold text-primary-foreground transition-all hover:bg-primary/90">
               Confirm & Start
             </button>
           </div>

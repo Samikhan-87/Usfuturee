@@ -1,14 +1,20 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Check, Plus, CalendarDays, BadgeCheck } from "lucide-react";
 import { INSTITUTIONS, UPCOMING_EVENTS } from "@/utils/mockData";
 
 export const RightSidebar = () => {
   const [following, setFollowing] = useState({});
+  const navigate = useNavigate();
 
   const toggle = (id) => setFollowing((f) => ({ ...f, [id]: !f[id] }));
 
   return (
-    <aside className="sticky top-20 hidden h-fit flex-col gap-6 xl:flex" data-testid="right-sidebar">
+    /* w-[280px] — hidden below xl */
+    <aside
+      className="sticky top-20 hidden h-fit w-[280px] shrink-0 flex-col gap-5 xl:flex"
+      data-testid="right-sidebar"
+    >
       {/* Follow Institution */}
       <div className="rounded-2xl border border-border bg-card p-5">
         <h3 className="mb-4 font-heading text-base font-bold text-foreground">Follow Institutions</h3>
@@ -26,10 +32,10 @@ export const RightSidebar = () => {
               <button
                 data-testid={`follow-institution-${inst.id}`}
                 onClick={() => toggle(inst.id)}
-                className={`flex items-center gap-1 rounded-full px-3 py-1.5 text-xs font-bold transition-all duration-200 ${
+                className={`shrink-0 flex items-center gap-1 rounded-full px-3 py-1.5 text-xs font-bold transition-all duration-200 ${
                   following[inst.id]
                     ? "bg-secondary text-foreground"
-                    : "bg-primary text-primary-foreground hover:bg-primary-hover"
+                    : "bg-primary text-primary-foreground hover:bg-primary/90"
                 }`}
               >
                 {following[inst.id] ? <><Check className="h-3.5 w-3.5" /> Following</> : <><Plus className="h-3.5 w-3.5" /> Follow</>}
@@ -48,7 +54,8 @@ export const RightSidebar = () => {
           {UPCOMING_EVENTS.map((ev) => (
             <button
               key={ev.id}
-              data-testid={`event-${ev.id}`}
+              data-testid={`sidebar-event-${ev.id}`}
+              onClick={() => navigate(`/events/${ev.id}`)}
               className="group flex items-center gap-3 rounded-xl p-2 text-left transition-all duration-200 hover:bg-accent"
             >
               <div className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-accent text-primary">
@@ -64,7 +71,7 @@ export const RightSidebar = () => {
         </div>
       </div>
 
-      {/* Website footer */}
+      {/* Footer links */}
       <div className="rounded-2xl border border-border bg-card p-5">
         <div className="flex flex-wrap gap-x-4 gap-y-2 text-sm">
           {["About", "Privacy", "Terms", "Help", "Careers"].map((l) => (

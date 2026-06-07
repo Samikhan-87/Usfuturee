@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { MainLayout } from "@/layouts/MainLayout";
 import { GroupPostCard } from "@/components/GroupPostCard";
 import {
@@ -25,6 +26,7 @@ const PrivacyBadge = ({ privacy }) => (
 );
 
 export default function Groups() {
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [joined, setJoined] = useState({});
   const [activeCat, setActiveCat] = useState(null);
@@ -81,9 +83,11 @@ export default function Groups() {
 
           {/* Your Groups */}
           <TabsContent value="yours" className="mt-6" data-testid="groups-yours">
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {YOUR_GROUPS.map((g) => (
-                <div key={g.id} data-testid={`your-group-${g.id}`} className="group overflow-hidden rounded-2xl border border-border bg-card transition-all duration-200 hover:-translate-y-1">
+                <div key={g.id} data-testid={`your-group-${g.id}`}
+                  onClick={() => navigate(`/groups/${g.id}`)}
+                  className="group cursor-pointer overflow-hidden rounded-2xl border border-border bg-card transition-all duration-200 hover:-translate-y-1">
                   <div className="relative h-28">
                     <img src={g.banner} alt={g.name} className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
@@ -97,13 +101,14 @@ export default function Groups() {
                     <div className="mt-4 flex items-center gap-2">
                       <button
                         data-testid={`view-group-${g.id}`}
-                        className="flex-1 rounded-full bg-primary py-2 text-sm font-semibold text-primary-foreground transition-all duration-200 hover:bg-primary-hover"
+                        onClick={(e) => { e.stopPropagation(); navigate(`/groups/${g.id}`); }}
+                        className="flex-1 rounded-full bg-primary py-2 text-sm font-semibold text-primary-foreground transition-all duration-200 hover:bg-primary/90"
                       >
                         View
                       </button>
                       <button
                         data-testid={`settings-group-${g.id}`}
-                        onClick={() => toast.info("Group settings coming soon")}
+                        onClick={(e) => { e.stopPropagation(); toast.info("Group settings coming soon"); }}
                         className="grid h-9 w-9 place-items-center rounded-full bg-secondary text-foreground transition-all hover:bg-accent"
                       >
                         <Settings className="h-4 w-4" />
